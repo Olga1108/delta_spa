@@ -1,0 +1,59 @@
+@font-face {
+  font-family: "Stolzl";
+  src:
+    url("../assets/Fonts/Stolzl-300.woff2") format("woff2"),
+    url("../assets/Fonts/Stolzl-300.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Stolzl";
+  src:
+    url("../assets/Fonts/Stolzl-400.woff2") format("woff2"),
+    url("../assets/Fonts/Stolzl-400.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Halvar Breit";
+  src:
+    url("../assets/Fonts/HalvarBreit-300.woff2") format("woff2"),
+    url("../assets/Fonts/HalvarBreit-300.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Halvar Breit";
+  src:
+    url("../assets/Fonts/HalvarBreit-400.woff2") format("woff2"),
+    url("../assets/Fonts/HalvarBreit-400.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Halvar Breit";
+  src:
+    url("../assets/Fonts/HalvarBreit-500.woff2") format("woff2"),
+    url("../assets/Fonts/HalvarBreit-500.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Halvar Breit";
+  src:
+    url("../assets/Fonts/HalvarBreit-700.woff2") format("woff2"),
+    url("../assets/Fonts/HalvarBreit-700.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
