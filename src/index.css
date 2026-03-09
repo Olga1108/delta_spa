@@ -4,6 +4,16 @@
 @theme {
   --font-body: "Stolzl", system-ui, sans-serif;
   --font-heading: "Halvar Breit", "Stolzl", system-ui, sans-serif;
+
+  --color-yellow: #FEE97D;
+  --color-light-purple: #8E03D1;
+  --color-purple-main: #9E13E0;
+  --color-purple-dark: #560080;
+  --color-purple-darker: #220032;
+  --color-black: #0C090E;
+  --color-white: #FFFFFF;
+
+  --spacing-container: 80rem;
 }
 
 *,
