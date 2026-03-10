@@ -6,4 +6,10 @@ export const API_BASE_URL =
     : '/api'
 
 export const API_KEY_HEADER = 'x-api-key'
-export const API_KEY = import.meta.env.VITE_API_KEY ?? 'prodcpakey333'
+
+const envKey = import.meta.env.VITE_API_KEY?.trim()
+if (!envKey) {
+  throw new Error('VITE_API_KEY is not set. Add your key to .env.local.')
+}
+
+export const API_KEY = envKey
