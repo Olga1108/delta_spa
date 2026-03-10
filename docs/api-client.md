@@ -21,7 +21,10 @@ Source: `src/shared/config/api.ts`
 
 - `API_BASE_URL` from `VITE_API_BASE_URL`
 - `API_KEY_HEADER` (`x-api-key`)
-- `API_KEY` from `VITE_API_KEY` (with fallback)
+- `API_KEY` from `VITE_API_KEY` (required)
+
+If `VITE_API_KEY` is missing or empty, the app throws an error at startup.
+Add it to `.env.local` (or your environment config in CI/CD).
 
 Example:
 
