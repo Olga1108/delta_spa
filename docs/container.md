@@ -11,9 +11,8 @@ Provide a fixed-width, centered content area for the CPA app so layout matches t
 
 ## Architecture
 
-- `src/index.css` – Global only: `@theme` defines `--container-max-width` (80rem) and `--container-padding-x` (1rem base); mobile-first overrides for `--container-padding-x` at 768px and 1280px. No component-specific classes (those live in CSS modules).
-- `src/shared/ui/Container/Container.module.css` – Scoped container styles (`.root`, `.fullWidth`); uses theme variables for max-width and padding.
-- `src/shared/ui/Container/Container.tsx` – `Container` component; optional `fullWidth` for padding-only, no max-width.
+- `src/index.css` – Global only: `@theme` defines `--container-max-width` (80rem) and `--container-padding-x` (1rem base); mobile-first overrides for `--container-padding-x` at 768px and 1280px.
+- `src/shared/ui/Container/Container.tsx` – `Container` component uses Tailwind utilities (e.g. `w-full`, `max-w-[var(--container-max-width)]`, `mx-auto`, `px-[var(--container-padding-x)]`); optional `fullWidth` for padding-only, no max-width.
 
 ## Usage
 
@@ -56,13 +55,12 @@ function SomePage() {
 ## Decisions and Tradeoffs
 
 - **80rem (1280px):** Matches common desktop frame width and existing `--spacing-container`; works well for 13" screens per task.
-- **Mobile-first padding:** Base 1rem gives more content space on small screens; 1.5rem at 768px and 2rem at 1280px keep proportions on larger viewports. All via `--container-padding-x` in `index.css`; the CSS module references it so one variable drives the component.
-- **CSS modules:** Container styles live in `Container.module.css` so they are scoped and don’t pollute the global namespace; `index.css` stays for design tokens, reset, and body only.
+- **Mobile-first padding:** Base 1rem gives more content space on small screens; 1.5rem at 768px and 2rem at 1280px keep proportions on larger viewports. All via `--container-padding-x` in `index.css`; Container uses it via Tailwind’s `px-[var(--container-padding-x)]`.
+- **Tailwind:** Container and other UI use Tailwind where possible; CSS modules only when needed (e.g. complex selectors or animations). Global `index.css` holds design tokens, reset, and body only.
 - **#root no longer constrained:** Container was moved off `#root` so full-height pages and background animations can be full viewport; each page/section opts in via `<Container>`.
 
 ## Related Files
 
 - `src/index.css`
 - `src/shared/ui/Container/Container.tsx`
-- `src/shared/ui/Container/Container.module.css`
 - `src/shared/ui/Container/index.ts`
