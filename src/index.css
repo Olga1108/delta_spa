@@ -1,3 +1,4 @@
+@import "modern-normalize/modern-normalize.css";
 @import "tailwindcss";
 @import "./shared/styles/fonts.css";
 
@@ -14,12 +15,20 @@
   --color-white: #FFFFFF;
 
   --spacing-container: 80rem;
+  --container-max-width: 80rem;
+  --container-padding-x: 1rem;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+@media (width >= 768px) {
+  :root {
+    --container-padding-x: 1.5rem;
+  }
+}
+
+@media (width >= 1280px) {
+  :root {
+    --container-padding-x: 2rem;
+  }
 }
 
 html,
