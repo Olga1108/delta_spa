@@ -30,6 +30,7 @@ const parseResponse = async <T>(response: Response): Promise<T> => {
   if (response.status === 204) {
     return undefined as T
   }
+  const contentLength = response.headers.get('content-length')
 
   const contentType = response.headers.get('content-type') ?? ''
 
@@ -40,10 +41,7 @@ const parseResponse = async <T>(response: Response): Promise<T> => {
   return response.text() as Promise<T>
 }
 
-export const createApiClient = ({
-  baseUrl,
-  requestInterceptors = [],
-}: CreateApiClientOptions) => {
+export const createApiClient = ({ baseUrl, requestInterceptors = [] }: CreateApiClientOptions) => {
   const normalizedBaseUrl = normalizeBaseUrl(baseUrl)
   const interceptors = [...requestInterceptors]
 
