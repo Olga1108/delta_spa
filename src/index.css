@@ -30,7 +30,11 @@
   }
 }
 
-html,
+html {
+  min-height: 100%;
+  min-height: 100dvh;
+}
+
 body,
 #root {
   min-height: 100%;

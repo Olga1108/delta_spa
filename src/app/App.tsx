@@ -1,10 +1,8 @@
-import { Container } from "@shared/ui/Container"
+import { AppRouterProvider } from './providers/RouterProvider'
 
 function App() {
   return (
-    <Container>
-      <h1>Vite + React</h1>
-    </Container>
+      <AppRouterProvider />
   );
 }
 
