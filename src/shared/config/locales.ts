@@ -19,8 +19,7 @@ export const normalizeUiLocale = (value?: string | null): UiLocale => {
   return (token && uiLocaleAliases[token]) || DEFAULT_UI_LOCALE
 }
 
-export const toApiLocale = (value?: string | null): ApiLocale =>
-  normalizeUiLocale(value)
+export const toApiLocale = (value?: string | null): ApiLocale => normalizeUiLocale(value)
 
 export const getLocaleFromPathname = (pathname: string): UiLocale => {
   const token = normalizeLocaleToken(pathname.split('/').filter(Boolean)[0])
