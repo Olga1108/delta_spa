@@ -3,7 +3,9 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import { fileURLToPath, URL } from 'node:url'
 
-const resolvePath = (path: string) => { return fileURLToPath(new URL(path, import.meta.url)) }
+const resolvePath = (path: string) => {
+  return fileURLToPath(new URL(path, import.meta.url))
+}
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {

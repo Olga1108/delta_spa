@@ -43,9 +43,7 @@ type RequestContext = {
   init: RequestInit
 }
 
-type RequestInterceptor = (
-  context: RequestContext,
-) => RequestContext | Promise<RequestContext>
+type RequestInterceptor = (context: RequestContext) => RequestContext | Promise<RequestContext>
 ```
 
 The project uses `withApiKey`, which injects `x-api-key` into every request.
@@ -71,8 +69,7 @@ Define requests in domain slices (`entities/*/api`, `features/*/api`), not in `s
 ```ts
 import { apiClient } from '@shared/api'
 
-export const getBenefits = (locale: 'en' | 'ua') =>
-  apiClient.get(`/${locale}/benefits`)
+export const getBenefits = (locale: 'en' | 'ua') => apiClient.get(`/${locale}/benefits`)
 ```
 
 ## Recommendations

@@ -1,18 +1,17 @@
-@import "modern-normalize/modern-normalize.css";
-@import "tailwindcss";
-@import "./shared/styles/fonts.css";
+@import 'tailwindcss';
+@import './shared/styles/fonts.css';
 
 @theme {
-  --font-body: "Stolzl", system-ui, sans-serif;
-  --font-heading: "Halvar Breit", "Stolzl", system-ui, sans-serif;
+  --font-body: 'Stolzl', system-ui, sans-serif;
+  --font-heading: 'Halvar Breit', 'Stolzl', system-ui, sans-serif;
 
-  --color-yellow: #FEE97D;
-  --color-light-purple: #8E03D1;
-  --color-purple-main: #9E13E0;
+  --color-yellow: #fee97d;
+  --color-light-purple: #8e03d1;
+  --color-purple-main: #9e13e0;
   --color-purple-dark: #560080;
   --color-purple-darker: #220032;
-  --color-black: #0C090E;
-  --color-white: #FFFFFF;
+  --color-black: #0c090e;
+  --color-white: #ffffff;
 
   --spacing-container: 80rem;
   --container-max-width: 80rem;
