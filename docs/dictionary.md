@@ -55,10 +55,10 @@ Use flat keys with dot notation: `section.element` or `section.component.element
 
 ## Data Split
 
-| Source      | Content                          |
-| ----------- | --------------------------------- |
-| Dictionary  | Nav, footer, form labels, modals |
-| API         | Benefits, multiply, tasks        |
+| Source     | Content                          |
+| ---------- | -------------------------------- |
+| Dictionary | Nav, footer, form labels, modals |
+| API        | Benefits, multiply, tasks        |
 
 ## Related Files
 

@@ -20,7 +20,7 @@ Provide a fixed-width, centered content area for the CPA app so layout matches t
 1. Wrap page content that should respect the fixed width:
 
 ```tsx
-import { Container } from "@shared/ui/Container";
+import { Container } from '@shared/ui/Container'
 
 function SomePage() {
   return (
@@ -30,7 +30,7 @@ function SomePage() {
         <p>Content constrained to container width.</p>
       </Container>
     </section>
-  );
+  )
 }
 ```
 
