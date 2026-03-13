@@ -5,7 +5,8 @@ export type Dictionary = Record<string, string>
 export const dictionaries: Record<UiLocale, Dictionary> = {
   en: {
     'hero.title': 'Practice Makes Profit',
-    'hero.description': 'We provide effective solutions, tested and refined on our own products and budgets',
+    'hero.description':
+      'We provide effective solutions, tested and refined on our own products and budgets',
     'header.nav.benefits': 'Benefits',
     'header.nav.team': 'Team',
     'header.nav.join': 'Join Us',
@@ -21,18 +22,19 @@ export const dictionaries: Record<UiLocale, Dictionary> = {
   },
   ua: {
     'hero.title': 'Practice Makes Profit',
-    'hero.description': 'Пропонуємо ефективні рішення, які вже протестували на своїх продуктах та бюджетах',
+    'hero.description':
+      'Пропонуємо ефективні рішення, які вже протестували на своїх продуктах та бюджетах',
     'header.nav.benefits': 'Переваги',
     'header.nav.team': 'Команда',
     'header.nav.join': 'З нами',
     'footer.scrollToTop': 'Прокрутити вгору',
-    'form.title': 'Поля із зірочкою (*) є обов\'язковими',
+    'form.title': "Поля із зірочкою (*) є обов'язковими",
     'form.name': "Ваше Ім'я",
     'form.contact': 'Ваш Контакт',
-    'form.contact.method': 'Спосіб зв\'язку',
+    'form.contact.method': "Спосіб зв'язку",
     'form.submit': 'Надіслати',
     'modal.title': 'Ми отримали вашу заявку!',
-    'modal.text': 'Ми опрацюємо ваш запит і зв\'яжемося з вами',
+    'modal.text': "Ми опрацюємо ваш запит і зв'яжемося з вами",
     'modal.button.done': 'Готово',
   },
 }

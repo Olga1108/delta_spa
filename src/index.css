@@ -14,15 +14,27 @@
   --color-white: #ffffff;
 
   --spacing-container: 80rem;
+  --container-max-width: 80rem;
+  --container-padding-x: 1rem;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+@media (width >= 768px) {
+  :root {
+    --container-padding-x: 1.5rem;
+  }
 }
 
-html,
+@media (width >= 1280px) {
+  :root {
+    --container-padding-x: 2rem;
+  }
+}
+
+html {
+  min-height: 100%;
+  min-height: 100dvh;
+}
+
 body,
 #root {
   min-height: 100%;
