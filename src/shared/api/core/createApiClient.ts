@@ -30,7 +30,6 @@ const parseResponse = async <T>(response: Response): Promise<T> => {
   if (response.status === 204) {
     return undefined as T
   }
-  const contentLength = response.headers.get('content-length')
 
   const contentType = response.headers.get('content-type') ?? ''
 
