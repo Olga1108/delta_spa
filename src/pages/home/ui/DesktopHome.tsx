@@ -6,7 +6,7 @@ export const DesktopHome = () => {
   const viewportRef = useRef<HTMLElement>(null)
   const trackRef = useRef<HTMLDivElement>(null)
 
-  const { activeIndex, isAnimating, goTo, next, prev } = useFullPageEngine({
+  const { activeIndex } = useFullPageEngine({
     viewportRef,
     trackRef,
     sectionIds: homeSectionIds,
@@ -27,42 +27,6 @@ export const DesktopHome = () => {
           </section>
         ))}
       </div>
-
-      <aside className="absolute top-4 right-4 z-20 flex flex-col gap-3 rounded-2xl border border-white/20 bg-black/45 p-3 backdrop-blur-md">
-        <div className="text-xs text-white/75">
-          Section {activeIndex + 1} / {homeSections.length}
-        </div>
-        <div className="text-xs text-white/75">Animating: {isAnimating ? 'yes' : 'no'}</div>
-        <div className="flex gap-2">
-          <button
-            type="button"
-            onClick={prev}
-            className="rounded-lg border border-white/30 px-2 py-1 text-xs hover:bg-white/10"
-          >
-            Prev
-          </button>
-          <button
-            type="button"
-            onClick={next}
-            className="rounded-lg border border-white/30 px-2 py-1 text-xs hover:bg-white/10"
-          >
-            Next
-          </button>
-        </div>
-        <div className="flex gap-2">
-          {homeSections.map((section, index) => (
-            <button
-              key={section.id}
-              type="button"
-              onClick={() => goTo(index)}
-              className={`h-2.5 w-2.5 rounded-full transition ${
-                activeIndex === index ? 'bg-white' : 'bg-white/30'
-              }`}
-              aria-label={`Go to ${section.id}`}
-            />
-          ))}
-        </div>
-      </aside>
     </main>
   )
 }

@@ -1,4 +1,3 @@
-export { GsapBasicsDemo } from './ui/GsapBasicsDemo'
 export { useFullPageEngine } from './model/useFullPageEngine'
 export type {
   FullPageScrollDirection,
