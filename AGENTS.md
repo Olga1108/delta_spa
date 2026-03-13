@@ -70,6 +70,13 @@
 - Before creating or updating PR, run `npm run format:check`.
 - If formatting fails, run `npm run format` and commit formatting changes.
 
+## TypeScript Discipline
+
+- This project is TypeScript-first.
+- Start every change by checking existing types/contracts in related slices/files.
+- Keep type safety strict during implementation; do not bypass typing with `any` unless explicitly justified.
+- Before finishing work, ensure type checks remain valid (`npm run build` at minimum).
+
 ## Done Criteria
 
 - Code follows FSD boundaries.
