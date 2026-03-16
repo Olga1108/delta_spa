@@ -23,6 +23,16 @@
 - Keep transport/infrastructure in `shared/api`
 - Follow configured aliases: `@`, `@app`, `@pages`, `@widgets`, `@features`, `@entities`, `@shared`
 
+## Home Page and Animations
+
+- `useFullPageEngine` in `features/animations` is generic transition infrastructure only.
+- Section-specific transition logic must be colocated with section widgets (`widgets/homeSections/*/model/animationStrategy.ts`).
+- Section order and strategy registry are assembled at page level (`pages/home/config/fullPageMock.ts`).
+- `HomePage` must keep desktop and mobile flows separated:
+  - Desktop: full-page GSAP transitions.
+  - Mobile: normal vertical layout without full-page transitions.
+- Reuse the same section widgets for desktop and mobile; avoid duplicating content markup.
+
 ## API Rules
 
 - Use `apiClient` from `@shared/api` for all HTTP calls.
@@ -59,6 +69,13 @@
 - Before creating or updating PR, run `npm run lint`.
 - Before creating or updating PR, run `npm run format:check`.
 - If formatting fails, run `npm run format` and commit formatting changes.
+
+## TypeScript Discipline
+
+- This project is TypeScript-first.
+- Start every change by checking existing types/contracts in related slices/files.
+- Keep type safety strict during implementation; do not bypass typing with `any` unless explicitly justified.
+- Before finishing work, ensure type checks remain valid (`npm run build` at minimum).
 
 ## Done Criteria
 
