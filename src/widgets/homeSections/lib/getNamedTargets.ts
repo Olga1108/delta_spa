@@ -1,7 +1,7 @@
 export const getAnimPart = (section: HTMLElement, key: 'meta' | 'title' | 'text') =>
   section.querySelector<HTMLElement>(`[data-anim="${key}"]`)
 
-export const compact = <T,>(items: Array<T | null | undefined>): T[] =>
+export const compact = <T>(items: Array<T | null | undefined>): T[] =>
   items.filter((item): item is T => Boolean(item))
 
 export const getNamedTargets = (section: HTMLElement) => {

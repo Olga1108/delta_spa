@@ -1,4 +1,4 @@
 export { HeroSectionMock, heroSectionAnimationStrategy } from './hero'
 export { BenefitsSectionMock, benefitsSectionAnimationStrategy } from './benefits'
-export { MultiplySectionMock, multiplySectionAnimationStrategy } from './multiply'
-export { JoinSectionMock, joinSectionAnimationStrategy } from './join'
+export { MultiplySection, multiplySectionAnimationStrategy } from './multiply'
+export { JoinSection, joinSectionAnimationStrategy } from './join'

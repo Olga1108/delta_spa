@@ -3,8 +3,8 @@ import type { FullPageSectionAnimationStrategy } from '@features/animations'
 import {
   BenefitsSectionMock,
   HeroSectionMock,
-  JoinSectionMock,
-  MultiplySectionMock,
+  JoinSection,
+  MultiplySection,
   benefitsSectionAnimationStrategy,
   heroSectionAnimationStrategy,
   joinSectionAnimationStrategy,
@@ -30,22 +30,23 @@ export const homeSections: HomeSectionConfig[] = [
   },
   {
     id: 'multiply',
-    color: 'from-emerald-700 via-teal-700 to-cyan-900',
-    Component: MultiplySectionMock,
+    color: 'from-[#dc8400] via-[#560080] to-[#220032]',
+    Component: MultiplySection,
   },
   {
     id: 'join',
-    color: 'from-amber-600 via-orange-600 to-red-800',
-    Component: JoinSectionMock,
+    color: 'from-[#dc8400] via-[#560080] to-[#220032]',
+    Component: JoinSection,
   },
 ]
 
 export const homeSectionIds = homeSections.map((section) => section.id)
 
-export const homeSectionAnimationStrategies: Partial<Record<HomeSectionConfig['id'], FullPageSectionAnimationStrategy>> =
-  {
-    hero: heroSectionAnimationStrategy,
-    benefits: benefitsSectionAnimationStrategy,
-    multiply: multiplySectionAnimationStrategy,
-    join: joinSectionAnimationStrategy,
-  }
+export const homeSectionAnimationStrategies: Partial<
+  Record<HomeSectionConfig['id'], FullPageSectionAnimationStrategy>
+> = {
+  hero: heroSectionAnimationStrategy,
+  benefits: benefitsSectionAnimationStrategy,
+  multiply: multiplySectionAnimationStrategy,
+  join: joinSectionAnimationStrategy,
+}

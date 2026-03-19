@@ -1,6 +1,10 @@
 import { useRef } from 'react'
 import { useFullPageEngine } from '@features/animations'
-import { homeSectionAnimationStrategies, homeSectionIds, homeSections } from '../config/fullPageMock'
+import {
+  homeSectionAnimationStrategies,
+  homeSectionIds,
+  homeSections,
+} from '../config/fullPageMock'
 
 export const DesktopHome = () => {
   const viewportRef = useRef<HTMLElement>(null)
