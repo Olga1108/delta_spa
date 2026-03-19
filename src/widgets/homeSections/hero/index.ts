@@ -1,2 +1,2 @@
-export { HeroSectionMock } from './ui/HeroSectionMock'
+export { HeroSection } from './ui/HeroSection'
 export { heroSectionAnimationStrategy } from './model/animationStrategy'
