@@ -1,18 +1,35 @@
 import { ParallelogramButton } from '@shared/ui/ParallelogramButton'
-import { audienceButtons } from '../constants'
+import type { MultiplySectionContent } from '@entities/multiply'
 import { LineArrow } from './LineArrow'
 
-export const JoinMobileLayout = () => {
+type JoinMobileLayoutProps = {
+  items: MultiplySectionContent[]
+  activeAudience: number
+  setActiveAudience: (index: number) => void
+  getAudienceLabel: (key: MultiplySectionContent['key']) => string
+  getCtaLabel: (key: MultiplySectionContent['key']) => string
+}
+
+export const JoinMobileLayout = ({
+  items,
+  activeAudience,
+  setActiveAudience,
+  getAudienceLabel,
+  getCtaLabel,
+}: JoinMobileLayoutProps) => {
+  const currentItem = items[activeAudience] ?? items[0]
+
   return (
     <div className="space-y-6 md:hidden">
       <div className="space-y-3">
-        {audienceButtons.map((item, index) => {
-          const isHighlighted = index === 0
+        {items.map((item, index) => {
+          const isHighlighted = index === activeAudience
 
           return (
             <button
-              key={item.label}
+              key={item.key}
               type="button"
+              onClick={() => setActiveAudience(index)}
               className="flex h-16 w-full items-center justify-between rounded-full border-2 px-8 font-heading text-[24px] leading-6"
               style={{
                 borderColor: isHighlighted ? 'var(--color-black)' : 'var(--color-yellow)',
@@ -20,7 +37,7 @@ export const JoinMobileLayout = () => {
                 color: isHighlighted ? 'var(--color-black)' : 'var(--color-yellow)',
               }}
             >
-              <span className="font-[500]">{item.label}</span>
+              <span className="font-[500]">{getAudienceLabel(item.key)}</span>
               <LineArrow
                 width={40}
                 color={isHighlighted ? 'var(--color-black)' : 'var(--color-yellow)'}
@@ -33,10 +50,7 @@ export const JoinMobileLayout = () => {
 
       <div className="rounded-xl bg-[linear-gradient(133.8deg,#a30ee9_5.95%,#8a00cc_98.41%)] p-5 text-center text-white">
         <div className="mx-auto max-w-[560px] space-y-4">
-          <p className="font-heading text-xl leading-6 font-[500]">
-            Got experience with sweepstakes and large ad budgets? Looking for a team where you can
-            grow and scale without limits?
-          </p>
+          <p className="font-heading text-xl leading-6 font-[500]">{currentItem.step1}</p>
           <div className="flex justify-center">
             <LineArrow
               width={30}
@@ -45,10 +59,7 @@ export const JoinMobileLayout = () => {
               className="rotate-90"
             />
           </div>
-          <p className="font-heading text-xl leading-6 font-[500]">
-            Multiply your profits with MULTICPA — we provide the budget, all the tools and high
-            profit shares
-          </p>
+          <p className="font-heading text-xl leading-6 font-[500]">{currentItem.step2}</p>
           <div className="flex justify-center">
             <LineArrow
               width={30}
@@ -65,7 +76,7 @@ export const JoinMobileLayout = () => {
             faceHeight={72}
             sideWidth={10}
           >
-            JOIN THE TEAM
+            {getCtaLabel(currentItem.key)}
           </ParallelogramButton>
         </div>
       </div>

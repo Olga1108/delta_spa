@@ -1,14 +1,46 @@
 import { useEffect, useState } from 'react'
+import { useBenefitsQuery } from '@entities/benefit'
+import { useDictionary } from '@shared/lib/dictionary'
 import { Container } from '@shared/ui/Container'
 import { MultiplyDesktopLayout } from './components/MultiplyDesktopLayout'
 import { MultiplyMarquee } from './components/MultiplyMarquee'
 import { MultiplyMobileLayout } from './components/MultiplyMobileLayout'
-import { getDesktopStageScale } from './constants'
+import { fallbackMultiplyContent, getDesktopStageScale } from './constants'
+
+const highlightedWordByLocale = {
+  en: 'guaranteed',
+  ua: 'гарантувати',
+} as const
+
+const getTitleParts = (title: string, locale: keyof typeof highlightedWordByLocale) => {
+  const highlight = highlightedWordByLocale[locale]
+  const normalizedTitle = title.toLowerCase()
+  const normalizedHighlight = highlight.toLowerCase()
+  const highlightIndex = normalizedTitle.indexOf(normalizedHighlight)
+
+  if (highlightIndex < 0) {
+    return {
+      before: title,
+      highlight: '',
+      after: '',
+    }
+  }
+
+  return {
+    before: title.slice(0, highlightIndex),
+    highlight: title.slice(highlightIndex, highlightIndex + highlight.length),
+    after: title.slice(highlightIndex + highlight.length),
+  }
+}
 
 export const MultiplySection = () => {
+  const { locale } = useDictionary()
+  const { data } = useBenefitsQuery(locale)
   const [desktopScale, setDesktopScale] = useState(1)
   const scalePx = (value: number) => `${Math.round(value * desktopScale)}px`
   const scaleFloatPx = (value: number) => `${(value * desktopScale).toFixed(3)}px`
+  const content = data ?? fallbackMultiplyContent
+  const titleParts = getTitleParts(content.title, locale)
 
   useEffect(() => {
     const updateScale = () => {
@@ -29,8 +61,22 @@ export const MultiplySection = () => {
         MULTI-BENEFITS
       </p>
 
-      <MultiplyDesktopLayout scalePx={scalePx} scaleFloatPx={scaleFloatPx} />
-      <MultiplyMobileLayout />
+      <MultiplyDesktopLayout
+        scalePx={scalePx}
+        scaleFloatPx={scaleFloatPx}
+        titleBeforeHighlight={titleParts.before}
+        titleHighlight={titleParts.highlight}
+        titleAfterHighlight={titleParts.after}
+        description={content.description}
+        benefits={content.benefits}
+      />
+      <MultiplyMobileLayout
+        titleBeforeHighlight={titleParts.before}
+        titleHighlight={titleParts.highlight}
+        titleAfterHighlight={titleParts.after}
+        description={content.description}
+        benefits={content.benefits}
+      />
       <MultiplyMarquee scalePx={scalePx} scaleFloatPx={scaleFloatPx} />
     </Container>
   )

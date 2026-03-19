@@ -1,23 +1,33 @@
-import { benefitCards } from '../constants'
+type MultiplyMobileLayoutProps = {
+  titleBeforeHighlight: string
+  titleHighlight: string
+  titleAfterHighlight: string
+  description: string
+  benefits: string[]
+}
 
-export const MultiplyMobileLayout = () => {
+export const MultiplyMobileLayout = ({
+  titleBeforeHighlight,
+  titleHighlight,
+  titleAfterHighlight,
+  description,
+  benefits,
+}: MultiplyMobileLayoutProps) => {
   return (
     <div className="md:hidden">
       <h2 className="font-heading text-4xl font-[500] leading-[0.95] text-white">
-        Results can only be <span className="text-[var(--color-yellow)]">guaranteed</span> when
-        you control every step
+        {titleBeforeHighlight}
+        <span className="text-[var(--color-yellow)]">{titleHighlight}</span>
+        {titleAfterHighlight}
       </h2>
-      <p className="mt-4 max-w-[510px] font-heading text-base leading-6 font-[500] text-white">
-        That&apos;s why we built a full-time in-house team and custom infrastructure - tailored for
-        every task, tested daily in the sweepstakes vertical
-      </p>
+      <p className="mt-4 max-w-[510px] font-heading text-base leading-6 font-[500] text-white">{description}</p>
       <div className="mt-6 space-y-3">
-        {benefitCards.map((card) => (
+        {benefits.map((benefit) => (
           <p
-            key={card.text}
+            key={benefit}
             className="rounded-lg bg-[var(--color-purple-main)] p-4 font-heading text-xl font-[500] leading-6 text-white"
           >
-            {card.text}
+            {benefit}
           </p>
         ))}
       </div>

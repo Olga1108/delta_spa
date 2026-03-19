@@ -1,8 +1,11 @@
+import type { MultiplySectionContent } from '@entities/multiply'
 import { AudienceButtonsDesktop } from './AudienceButtonsDesktop'
 import { JoinFooterDesktop } from './JoinFooterDesktop'
 import { JoinInfoPanelDesktop } from './JoinInfoPanelDesktop'
 
 type JoinDesktopLayoutProps = {
+  items: MultiplySectionContent[]
+  getAudienceLabel: (key: MultiplySectionContent['key']) => string
   desktopScale: number
   desktopContentTop: number
   activeAudience: number
@@ -15,9 +18,12 @@ type JoinDesktopLayoutProps = {
   scaleLeftPx: (value: number) => string
   rightTextSize: number
   rightArrowSize: number
+  getCtaLabel: (key: MultiplySectionContent['key']) => string
 }
 
 export const JoinDesktopLayout = ({
+  items,
+  getAudienceLabel,
   desktopScale,
   desktopContentTop,
   activeAudience,
@@ -30,7 +36,10 @@ export const JoinDesktopLayout = ({
   scaleLeftPx,
   rightTextSize,
   rightArrowSize,
+  getCtaLabel,
 }: JoinDesktopLayoutProps) => {
+  const currentItem = items[activeAudience] ?? items[0]
+
   return (
     <div className="relative hidden h-full w-full md:block">
       <p
@@ -58,6 +67,8 @@ export const JoinDesktopLayout = ({
         }}
       >
         <AudienceButtonsDesktop
+          items={items}
+          getAudienceLabel={getAudienceLabel}
           activeAudience={activeAudience}
           hoveredAudience={hoveredAudience}
           setActiveAudience={setActiveAudience}
@@ -70,6 +81,9 @@ export const JoinDesktopLayout = ({
           scalePx={scalePx}
           rightTextSize={rightTextSize}
           rightArrowSize={rightArrowSize}
+          step1={currentItem.step1}
+          step2={currentItem.step2}
+          ctaLabel={getCtaLabel(currentItem.key)}
         />
       </div>
 

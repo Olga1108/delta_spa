@@ -1,3 +1,7 @@
+import type { ZodType } from 'zod'
+import { ApiRequestError } from '../lib/errors'
+import { validateResponse } from '../lib/validateResponse'
+
 export type RequestContext = {
   url: string
   init: RequestInit
@@ -24,7 +28,7 @@ const normalizeBaseUrl = (baseUrl: string) => {
 
 const parseResponse = async <T>(response: Response): Promise<T> => {
   if (!response.ok) {
-    throw new Error(`Request failed with status ${response.status}`)
+    throw new ApiRequestError(response.status)
   }
 
   if (response.status === 204) {
@@ -78,8 +82,23 @@ export const createApiClient = ({ baseUrl, requestInterceptors = [] }: CreateApi
     return parseResponse<T>(response)
   }
 
+  const requestValidated = async <TOutput>(
+    path: string,
+    schema: ZodType<TOutput>,
+    init: RequestInit = {},
+  ): Promise<TOutput> => {
+    const response = await request<unknown>(path, init)
+    return validateResponse(schema, response, path)
+  }
+
   const get = <T>(path: string, init: RequestInit = {}) =>
     request<T>(path, {
+      ...init,
+      method: 'GET',
+    })
+
+  const getValidated = <TOutput>(path: string, schema: ZodType<TOutput>, init: RequestInit = {}) =>
+    requestValidated(path, schema, {
       ...init,
       method: 'GET',
     })
@@ -90,10 +109,23 @@ export const createApiClient = ({ baseUrl, requestInterceptors = [] }: CreateApi
       method: 'POST',
     })
 
+  const postValidated = <TOutput>(
+    path: string,
+    schema: ZodType<TOutput>,
+    init: RequestInit = {},
+  ) =>
+    requestValidated(path, schema, {
+      ...init,
+      method: 'POST',
+    })
+
   return {
     request,
+    requestValidated,
     get,
+    getValidated,
     post,
+    postValidated,
     addRequestInterceptor,
   }
 }

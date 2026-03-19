@@ -1,18 +1,24 @@
-import { ParallelogramButton } from '@shared/ui/ParallelogramButton'
-import { LineArrow } from './LineArrow'
-
 type JoinInfoPanelDesktopProps = {
   desktopScale: number
   scalePx: (value: number) => string
   rightTextSize: number
   rightArrowSize: number
+  step1: string
+  step2: string
+  ctaLabel: string
 }
+
+import { ParallelogramButton } from '@shared/ui/ParallelogramButton'
+import { LineArrow } from './LineArrow'
 
 export const JoinInfoPanelDesktop = ({
   desktopScale,
   scalePx,
   rightTextSize,
   rightArrowSize,
+  step1,
+  step2,
+  ctaLabel,
 }: JoinInfoPanelDesktopProps) => {
   return (
     <div
@@ -44,9 +50,8 @@ export const JoinInfoPanelDesktop = ({
             alignItems: 'center',
             justifyContent: 'center',
           }}
-        >
-          Got experience with sweepstakes and large ad budgets? Looking for a team where you can
-          grow and scale without limits?
+          >
+          {step1}
         </p>
 
         <LineArrow
@@ -66,10 +71,8 @@ export const JoinInfoPanelDesktop = ({
             alignItems: 'center',
             justifyContent: 'center',
           }}
-        >
-          Multiply your profits with MULTICPA — <br />
-          we provide the budget, all the tools <br />
-          and high profit shares
+          >
+          {step2}
         </p>
 
         <LineArrow
@@ -90,7 +93,7 @@ export const JoinInfoPanelDesktop = ({
             letterSpacing: scalePx(4),
           }}
         >
-          JOIN THE TEAM
+          {ctaLabel}
         </ParallelogramButton>
       </div>
     </div>

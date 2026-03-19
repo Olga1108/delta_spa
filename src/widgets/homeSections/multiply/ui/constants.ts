@@ -1,17 +1,15 @@
-export const benefitCards = [
-  {
-    text: 'We take on outsourced projects across any niche — from iGaming and dating to e-commerce and recruitment',
-    desktopMinHeight: 112,
-  },
-  {
-    text: 'We deliver what has already proven effective — many times over',
-    desktopMinHeight: 88,
-  },
-  {
-    text: "We don't learn at the client's expense",
-    desktopMinHeight: 64,
-  },
-]
+export const fallbackMultiplyContent = {
+  title: 'Results can only be guaranteed when you control every step',
+  description:
+    "That's why we built a full-time in-house team and custom infrastructure - tailored for every task, tested daily in the sweepstakes vertical",
+  benefits: [
+    'We take on outsourced projects across any niche — from iGaming and dating to e-commerce and recruitment',
+    'We deliver what has already proven effective — many times over',
+    "We don't learn at the client's expense",
+  ],
+}
+
+export const benefitCardDesktopHeights = [112, 88, 64]
 
 export const desktopLayout = {
   label: { top: 20, right: 30 },

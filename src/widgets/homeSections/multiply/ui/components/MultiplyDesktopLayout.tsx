@@ -1,12 +1,25 @@
 import snakeImage from '@shared/assets/Images/hero/hero-image-05@1x.svg'
-import { benefitCards, desktopLayout } from '../constants'
+import { benefitCardDesktopHeights, desktopLayout } from '../constants'
 
 type MultiplyDesktopLayoutProps = {
   scalePx: (value: number) => string
   scaleFloatPx: (value: number) => string
+  titleBeforeHighlight: string
+  titleHighlight: string
+  titleAfterHighlight: string
+  description: string
+  benefits: string[]
 }
 
-export const MultiplyDesktopLayout = ({ scalePx, scaleFloatPx }: MultiplyDesktopLayoutProps) => {
+export const MultiplyDesktopLayout = ({
+  scalePx,
+  scaleFloatPx,
+  titleBeforeHighlight,
+  titleHighlight,
+  titleAfterHighlight,
+  description,
+  benefits,
+}: MultiplyDesktopLayoutProps) => {
   return (
     <div className="relative hidden h-full w-full md:block">
       <div className="absolute inset-0 overflow-visible">
@@ -37,8 +50,9 @@ export const MultiplyDesktopLayout = ({ scalePx, scaleFloatPx }: MultiplyDesktop
             className="font-heading font-[500] text-white"
             style={{ fontSize: scalePx(40), lineHeight: scalePx(40) }}
           >
-            Results can only be <span className="text-[var(--color-yellow)]">guaranteed</span>{' '}
-            when you control every step
+            {titleBeforeHighlight}
+            <span className="text-[var(--color-yellow)]">{titleHighlight}</span>
+            {titleAfterHighlight}
           </h2>
           <p
             data-anim="text"
@@ -49,8 +63,7 @@ export const MultiplyDesktopLayout = ({ scalePx, scaleFloatPx }: MultiplyDesktop
               lineHeight: scalePx(24),
             }}
           >
-            That&apos;s why we built a full-time in-house team and custom infrastructure - tailored
-            for every task, tested daily in the sweepstakes vertical
+            {description}
           </p>
         </div>
 
@@ -76,20 +89,20 @@ export const MultiplyDesktopLayout = ({ scalePx, scaleFloatPx }: MultiplyDesktop
             </div>
 
             <div className="relative z-20" style={{ rowGap: scalePx(20), display: 'grid' }}>
-              {benefitCards.map((card) => (
+              {benefits.map((benefit, index) => (
                 <p
-                  key={card.text}
+                  key={benefit}
                   className="rounded-lg bg-[var(--color-purple-main)] font-heading font-[500] text-white transition-colors duration-200 ease-out md:hover:bg-[var(--color-yellow)] md:hover:text-[var(--color-black)]"
                   style={{
                     padding: scalePx(20),
                     fontSize: scalePx(20),
                     lineHeight: scalePx(24),
-                    minHeight: scalePx(card.desktopMinHeight),
+                    minHeight: scalePx(benefitCardDesktopHeights[index] ?? benefitCardDesktopHeights.at(-1) ?? 64),
                     display: 'flex',
                     alignItems: 'center',
                   }}
                 >
-                  {card.text}
+                  {benefit}
                 </p>
               ))}
             </div>

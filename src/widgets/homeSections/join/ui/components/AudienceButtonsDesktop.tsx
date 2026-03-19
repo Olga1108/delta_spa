@@ -1,7 +1,9 @@
-import { audienceButtons } from '../constants'
+import type { MultiplySectionContent } from '@entities/multiply'
 import { LineArrow } from './LineArrow'
 
 type AudienceButtonsDesktopProps = {
+  items: MultiplySectionContent[]
+  getAudienceLabel: (key: MultiplySectionContent['key']) => string
   activeAudience: number
   hoveredAudience: number | null
   setActiveAudience: (index: number) => void
@@ -11,6 +13,8 @@ type AudienceButtonsDesktopProps = {
 }
 
 export const AudienceButtonsDesktop = ({
+  items,
+  getAudienceLabel,
   activeAudience,
   hoveredAudience,
   setActiveAudience,
@@ -26,7 +30,7 @@ export const AudienceButtonsDesktop = ({
         rowGap: scaleLeftPx(20),
       }}
     >
-      {audienceButtons.map((item, index) => {
+      {items.map((item, index) => {
         const isHighlighted = index === activeAudience || index === hoveredAudience
         const arrowWidth = Math.max(38, 50 * leftBlockScale)
         const compressedRatio = Math.max(0, 0.9 - leftBlockScale)
@@ -36,7 +40,7 @@ export const AudienceButtonsDesktop = ({
 
         return (
           <button
-            key={item.label}
+            key={item.key}
             type="button"
             onMouseEnter={() => setHoveredAudience(index)}
             onMouseLeave={() => setHoveredAudience(null)}
@@ -45,7 +49,7 @@ export const AudienceButtonsDesktop = ({
             onClick={() => setActiveAudience(index)}
             className="relative flex items-center rounded-full font-heading transition-colors duration-200 ease-out"
             style={{
-              width: `${((item.width / 511) * 100).toFixed(3)}%`,
+              width: `${((item.buttonWidth / 511) * 100).toFixed(3)}%`,
               height: scaleLeftPx(80),
               paddingLeft: scaleLeftPx(57),
               borderStyle: 'solid',
@@ -63,7 +67,7 @@ export const AudienceButtonsDesktop = ({
                 maxWidth: `calc(100% - ${textRightReserve.toFixed(3)}px)`,
               }}
             >
-              {item.label}
+              {getAudienceLabel(item.key)}
             </span>
             <span
               className="absolute top-1/2 -translate-y-1/2"
