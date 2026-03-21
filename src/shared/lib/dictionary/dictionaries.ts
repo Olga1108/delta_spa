@@ -10,6 +10,7 @@ export const dictionaries: Record<UiLocale, Dictionary> = {
     'hero.description':
       'We provide effective solutions, tested and refined on our own products and ad budgets.',
     'hero.cta': 'Get in Touch',
+    'header.nav.main': 'Main',
     'header.nav.benefits': 'Benefits',
     'header.nav.team': 'Team',
     'header.nav.join': 'Join Us',
@@ -36,6 +37,7 @@ export const dictionaries: Record<UiLocale, Dictionary> = {
     'hero.description':
       'Пропонуємо ефективні рішення, які вже протестували на своїх продуктах та бюджетах',
     'hero.cta': "Зв'язатися",
+    'header.nav.main': 'Головна',
     'header.nav.benefits': 'Переваги',
     'header.nav.team': 'Команда',
     'header.nav.join': 'З нами',

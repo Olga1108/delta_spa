@@ -7,7 +7,9 @@ export const MobileHome = () => {
         <section
           key={section.id}
           id={section.id}
-          className={`relative flex min-h-dvh items-center py-16 bg-linear-to-b ${section.color}`}
+          className={`relative flex min-h-dvh bg-linear-to-b ${section.color} ${
+            section.id === 'hero' ? 'items-stretch py-0' : 'items-center py-16'
+          }`}
         >
           <section.Component />
         </section>

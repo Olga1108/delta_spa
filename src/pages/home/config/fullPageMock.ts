@@ -2,7 +2,7 @@ import type { ComponentType } from 'react'
 import type { FullPageSectionAnimationStrategy } from '@features/animations'
 import {
   BenefitsSectionMock,
-  HeroSectionMock,
+  HeroSection,
   JoinSection,
   MultiplySection,
   benefitsSectionAnimationStrategy,
@@ -21,7 +21,7 @@ export const homeSections: HomeSectionConfig[] = [
   {
     id: 'hero',
     color: 'from-fuchsia-700 via-purple-700 to-purple-900',
-    Component: HeroSectionMock,
+    Component: HeroSection,
   },
   {
     id: 'benefits',

@@ -1,0 +1,82 @@
+@property --hero-hole-x {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: -10%;
+}
+
+@property --hero-hole-y {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 50%;
+}
+
+.hero-bg {
+  --hero-hole-r: calc(33dvh + 100px);
+  --hero-hole-x: -10%;
+  --hero-hole-y: 50%;
+}
+
+.hero-bg__layer {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-bg__base {
+  background: linear-gradient(111.06deg, #dc8400 -3.49%, #560080 49.69%, #220032 91.86%);
+}
+
+.hero-bg__grid {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.38;
+}
+
+.hero-bg__overlay {
+  background: linear-gradient(111.06deg, #dc8400 -3.49%, #560080 49.69%, #220032 91.86%);
+  -webkit-mask-image: radial-gradient(
+    circle var(--hero-hole-r) at var(--hero-hole-x) var(--hero-hole-y),
+    transparent 0%,
+    rgba(0, 0, 0, 0.08) 52%,
+    rgba(0, 0, 0, 0.45) 68%,
+    #000 80%
+  );
+  mask-image: radial-gradient(
+    circle var(--hero-hole-r) at var(--hero-hole-x) var(--hero-hole-y),
+    transparent 0%,
+    rgba(0, 0, 0, 0.08) 52%,
+    rgba(0, 0, 0, 0.45) 68%,
+    #000 80%
+  );
+  animation: hero-hole-path 20s ease-in-out infinite;
+}
+
+@keyframes hero-hole-path {
+  0%,
+  18% {
+    --hero-hole-x: -10%;
+    --hero-hole-y: 50%;
+  }
+  34% {
+    --hero-hole-x: 102%;
+    --hero-hole-y: 8%;
+  }
+  50% {
+    --hero-hole-x: -10%;
+    --hero-hole-y: 50%;
+  }
+  76% {
+    --hero-hole-x: 102%;
+    --hero-hole-y: 92%;
+  }
+  100% {
+    --hero-hole-x: -10%;
+    --hero-hole-y: 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg__overlay {
+    animation: none;
+  }
+}

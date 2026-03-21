@@ -1,84 +1,70 @@
-import { useLocation } from 'react-router-dom'
+import { useState } from 'react'
 import { Container } from '@shared/ui/Container'
 import { useDictionary } from '@shared/lib/dictionary'
+import { ParallelogramButton } from '@shared/ui/ParallelogramButton'
 import { Header } from '@widgets/header'
-
-import gridBg from '@shared/assets/Images/bg/hero-bg-grid-purple.svg'
 import heroSnake from '@shared/assets/Images/hero/hero-image-main@1x.png'
-import iconInstagram from '@shared/assets/Images/icons/icon-instagram-light.svg'
-import iconTelegram from '@shared/assets/Images/icons/icon-telegram-light.svg'
-import iconLinkedin from '@shared/assets/Images/icons/icon-linkedin-light.svg'
+import { HeroAnimatedBackground } from './components/HeroAnimatedBackground'
+import { HeroMobileMenu } from './components/HeroMobileMenu'
+import { HeroSocialLinks } from './components/HeroSocialLinks'
 
-export const HeroSectionMock = () => {
+export const HeroSection = () => {
   const { translate } = useDictionary()
-  const { pathname } = useLocation()
-  const basePath = pathname.replace(/#.*$/, '') || '/'
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const handleJoinClick = () => {
+    window.location.hash = 'join'
+  }
 
   return (
-    <div className="relative flex min-h-full flex-col">
-      {/* Background gradient and grid */}
-      <div
-        className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#4B0082] via-[#3d0066] to-[#2E004F]"
-        aria-hidden
-      />
-      <img
-        src={gridBg}
-        alt=""
-        className="pointer-events-none absolute right-0 top-0 h-auto w-[min(70%,420px)] select-none opacity-60"
-        aria-hidden
-      />
+    <div className="relative flex w-full min-h-screen min-h-dvh flex-col overflow-hidden md:h-full md:min-h-0 md:self-stretch">
+      <HeroAnimatedBackground />
+      <Container fullWidth className="relative z-10 flex min-h-0 flex-1 flex-col md:mb-8">
+        <div data-anim="meta" className="hidden md:block">
+          <Header />
+        </div>
+        <HeroMobileMenu
+          isOpen={isMenuOpen}
+          onOpen={() => setIsMenuOpen(true)}
+          onClose={() => setIsMenuOpen(false)}
+        />
 
-      <Container fullWidth className="relative z-10 flex min-h-full flex-col">
-        <Header />
-
-        {/* Main: two columns */}
-        <div className="flex flex-1 flex-col items-center gap-10 py-8 md:flex-row md:items-center md:gap-12 lg:gap-16">
-          <div className="flex flex-1 flex-col justify-center md:max-w-[50%]">
+        <div className="relative flex min-h-0 flex-1 flex-col gap-0 pt-0 pb-4 md:flex-row md:items-stretch md:gap-12 md:py-8 lg:gap-16">
+          <div className="z-10 flex max-md:mt-[100px] flex-col justify-start md:max-w-[66%] md:flex-1 md:justify-center">
             <h1
               data-anim="title"
-              className="font-heading text-4xl font-bold leading-[1.1] tracking-tight text-white md:text-5xl lg:text-6xl xl:text-7xl"
+              className="max-w-[8.4em] font-heading text-[clamp(2.5rem,8vw,5rem)] font-bold leading-[0.9] tracking-[-1.74px] text-white uppercase md:max-w-[8.8em] md:text-[80px]"
             >
               <span>{translate('hero.titlePrefix')}</span>
-              <span className="text-[#E2FF6F]">{translate('hero.titleHighlight')}</span>
+              <span className="text-[var(--color-yellow)]">{translate('hero.titleHighlight')}</span>
             </h1>
             <p
               data-anim="text"
-              className="mt-4 max-w-lg font-body text-sm font-light leading-relaxed text-white/90 md:text-base lg:text-lg"
+              className="mt-4 max-w-[18em] align-middle font-body text-[20px] font-normal leading-[24px] tracking-normal text-white md:max-w-[30em]"
             >
               {translate('hero.description')}
             </p>
             <div className="mt-6 md:mt-8">
-              <a
-                href={`${basePath}#join`}
-                className="inline-flex items-center justify-center rounded border-2 border-black bg-[#E2FF6F] px-6 py-3 font-heading text-sm font-bold uppercase tracking-wide text-black shadow-[0_4px_0_0_rgba(0,0,0,1)] transition hover:bg-[#d4f065] focus-visible:outline focus-visible:ring-2 focus-visible:ring-white"
+              <ParallelogramButton
+                onClick={handleJoinClick}
+                width="clamp(17rem, 52vw, 21rem)"
+                height="clamp(5rem, 13vw, 5.75rem)"
+                className="text-[22px] leading-none tracking-[0.22em] text-[var(--color-black)] focus-visible:outline focus-visible:ring-2 focus-visible:ring-white md:text-[26px]"
               >
                 {translate('hero.cta')}
-              </a>
+              </ParallelogramButton>
             </div>
           </div>
-          <div className="flex flex-1 justify-center md:max-w-[50%] md:justify-end">
+          <div className="pointer-events-none z-0 mt-0 ml-[-76px] h-auto w-[510px] max-w-none max-md:relative md:absolute md:top-auto md:right-[320px] md:bottom-[-64px] md:left-auto md:z-0 md:ml-0 md:mt-0 md:max-w-[64%]">
             <img
               src={heroSnake}
               alt=""
-              className="h-auto max-h-[60vh] w-full max-w-md select-none object-contain md:max-h-[75vh]"
+              className="h-full w-full max-w-none select-none object-contain md:block md:h-auto md:w-auto md:max-w-[52rem]"
               draggable={false}
-              style={{ userSelect: 'none' }}
             />
           </div>
         </div>
 
-        {/* Hero social links (page footer is in the fourth section) */}
-        <div className="flex shrink-0 items-center gap-6 pb-6 md:pb-8" aria-label="Social links">
-          <a href="#" className="focus-visible:outline focus-visible:ring-2 focus-visible:ring-white" aria-label="Instagram">
-            <img src={iconInstagram} alt="" className="h-6 w-6 opacity-90 hover:opacity-100" />
-          </a>
-          <a href="#" className="focus-visible:outline focus-visible:ring-2 focus-visible:ring-white" aria-label="Telegram">
-            <img src={iconTelegram} alt="" className="h-6 w-6 opacity-90 hover:opacity-100" />
-          </a>
-          <a href="#" className="focus-visible:outline focus-visible:ring-2 focus-visible:ring-white" aria-label="LinkedIn">
-            <img src={iconLinkedin} alt="" className="h-6 w-6 opacity-90 hover:opacity-100" />
-          </a>
-        </div>
+        <HeroSocialLinks className="hidden shrink-0 items-center gap-6 pb-0 md:flex" />
       </Container>
     </div>
   )

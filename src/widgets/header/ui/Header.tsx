@@ -3,8 +3,15 @@ import { useDictionary } from '@shared/lib/dictionary'
 
 import logoImg from '@shared/assets/Images/icons/logo-main.svg'
 
-const navLinkClass =
-  'font-body text-xs font-normal uppercase tracking-[0.18em] text-white underline decoration-white/60 underline-offset-4 transition hover:decoration-white'
+/** Halvar Breit (Figma: Halvar Breitschrift), 20 / 700 / uppercase */
+const headerNavTypeClass =
+  'font-heading text-[20px] font-bold leading-none tracking-normal align-middle uppercase text-[var(--color-yellow)]'
+
+const headerNavLinkClass = `${headerNavTypeClass} underline decoration-solid decoration-[var(--color-yellow)] underline-offset-4 [text-decoration-thickness:0%] transition-colors hover:text-white hover:decoration-white`
+
+/** Active locale: white, no underline (inactive uses `headerNavLinkClass`). */
+const headerNavLocaleActiveClass =
+  'font-heading text-[20px] font-bold leading-none tracking-normal align-middle uppercase text-white no-underline transition-colors'
 
 export const Header = () => {
   const { translate, locale } = useDictionary()
@@ -17,28 +24,30 @@ export const Header = () => {
         <img src={logoImg} alt="CPA" className="h-8 w-auto md:h-9" />
       </a>
       <nav className="flex items-center gap-6 md:gap-8" aria-label="Main">
-        <a href={`${basePath}#benefits`} className={navLinkClass}>
+        <a href={`${basePath}#benefits`} className={headerNavLinkClass}>
           {translate('header.nav.team')}
         </a>
-        <a href={`${basePath}#multiply`} className={navLinkClass}>
+        <a href={`${basePath}#multiply`} className={headerNavLinkClass}>
           {translate('header.nav.benefits')}
         </a>
-        <a href={`${basePath}#join`} className={navLinkClass}>
+        <a href={`${basePath}#join`} className={headerNavLinkClass}>
           {translate('header.nav.join')}
         </a>
-        <span className="font-body text-xs uppercase tracking-wider text-white/80">
+        <span className="inline-flex items-center gap-1 text-[var(--color-yellow)]">
           <a
             href="/"
-            className={locale === 'en' ? 'underline decoration-white' : 'no-underline hover:underline'}
+            className={locale === 'en' ? headerNavLocaleActiveClass : headerNavLinkClass}
+            aria-current={locale === 'en' ? 'page' : undefined}
           >
-            EN
+            ENG
           </a>
-          <span className="mx-1">/</span>
+          <span aria-hidden>/</span>
           <a
             href="/ua"
-            className={locale === 'ua' ? 'underline decoration-white' : 'no-underline hover:underline'}
+            className={locale === 'ua' ? headerNavLocaleActiveClass : headerNavLinkClass}
+            aria-current={locale === 'ua' ? 'page' : undefined}
           >
-            UA
+            UKR
           </a>
         </span>
       </nav>
