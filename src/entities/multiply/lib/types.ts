@@ -1,11 +1,19 @@
-export type MultiplyStep = {
-  step_1: string
-  step_2: string
-}
+import type { z } from 'zod'
+import type {
+  multiplyItemSchema,
+  multiplyResponseSchema,
+  multiplyStepSchema,
+} from './schema'
 
-export type MultiplyItem = {
-  title: string
-  steps: MultiplyStep
-}
+export type MultiplyStep = z.infer<typeof multiplyStepSchema>
+export type MultiplyItem = z.infer<typeof multiplyItemSchema>
+export type MultiplyData = z.infer<typeof multiplyResponseSchema>
 
-export type MultiplyData = MultiplyItem[]
+export type MultiplyAudienceKey = 'media_buyers' | 'businesses' | 'partners'
+
+export type MultiplySectionContent = {
+  key: MultiplyAudienceKey
+  buttonWidth: number
+  step1: string
+  step2: string
+}

@@ -49,3 +49,18 @@ body {
   font-synthesis: none;
   @apply font-body;
 }
+
+@keyframes section-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.section-marquee-track {
+  animation: section-marquee 18s linear infinite;
+  width: max-content;
+  will-change: transform;
+}
