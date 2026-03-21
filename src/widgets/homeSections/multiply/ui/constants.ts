@@ -3,9 +3,9 @@ export const fallbackMultiplyContent = {
   description:
     "That's why we built a full-time in-house team and custom infrastructure - tailored for every task, tested daily in the sweepstakes vertical",
   benefits: [
-    'We take on outsourced projects across any niche — from iGaming and dating to e-commerce and recruitment',
-    'We deliver what has already proven effective — many times over',
+    'We run outsourced traffic projects across any niche — from iGaming and dating to e-commerce and recruitment',
     "We don't learn at the client's expense",
+    'We use what works — proven again and again',
   ],
 }
 

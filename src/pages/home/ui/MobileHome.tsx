@@ -1,13 +1,53 @@
+import { useBenefitsQuery } from '@entities/benefit'
+import { useMultiplyQuery } from '@entities/multiply'
+import { useDictionary } from '@shared/lib/dictionary'
+import { SectionErrorState, SectionLoadingState } from '@shared/ui/SectionRequestState'
 import { homeSections } from '../config/fullPageMock'
 
 export const MobileHome = () => {
+  const { locale, translate } = useDictionary()
+  const benefitsQuery = useBenefitsQuery(locale)
+  const multiplyQuery = useMultiplyQuery(locale)
+
+  if (benefitsQuery.isLoading || multiplyQuery.isLoading) {
+    return (
+      <main className="bg-black text-white">
+        <section className="relative flex min-h-dvh items-center justify-center bg-[linear-gradient(122deg,#dc8400_2%,#560080_50%,#220032_92%)]">
+          <SectionLoadingState />
+        </section>
+      </main>
+    )
+  }
+
+  if (benefitsQuery.isError || multiplyQuery.isError) {
+    return (
+      <main className="bg-black text-white">
+        <section className="relative flex min-h-dvh items-center justify-center bg-[linear-gradient(122deg,#dc8400_2%,#560080_50%,#220032_92%)]">
+          <SectionErrorState
+            title={translate('section.error.title')}
+            description={translate('section.error.description')}
+            actionLabel={translate('section.error.retry')}
+            onAction={() => {
+              void benefitsQuery.refetch()
+              void multiplyQuery.refetch()
+            }}
+          />
+        </section>
+      </main>
+    )
+  }
+
   return (
     <main className="bg-black text-white">
       {homeSections.map((section) => (
         <section
           key={section.id}
           id={section.id}
-          className={`relative flex min-h-dvh items-center py-16 bg-linear-to-b ${section.color}`}
+          className={`relative flex min-h-dvh bg-linear-to-b ${section.color} ${
+            section.id === 'multiply' || section.id === 'join'
+              ? 'items-start pt-0 pb-16'
+              : 'items-center py-16'
+          }`}
         >
           <section.Component />
         </section>

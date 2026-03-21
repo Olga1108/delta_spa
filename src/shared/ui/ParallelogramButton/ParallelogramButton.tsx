@@ -32,7 +32,7 @@ export const ParallelogramButton = ({
   return (
     <button
       type="button"
-      className={`group relative inline-flex items-center justify-center font-heading uppercase ${className}`.trim()}
+      className={`group relative inline-flex cursor-pointer items-center justify-center font-heading uppercase ${className}`.trim()}
       style={rootStyle}
       {...rest}
     >
