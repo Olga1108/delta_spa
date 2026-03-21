@@ -22,8 +22,8 @@ export const JoinSection = () => {
   const rightTextSize = Math.max(16, 20 * desktopScale)
   const rightArrowSize = Math.max(28, 30 * desktopScale)
   const items: MultiplySectionContent[] = data ? mapMultiplyData(data) : []
-  const getAudienceLabel = (key: (typeof items)[number]['key']) => translate(`join.audience.${key}`)
-  const getCtaLabel = (key: (typeof items)[number]['key']) => translate(`join.cta.${key}`)
+  const getAudienceLabel = (key: MultiplySectionContent['key']) => translate(`join.audience.${key}`)
+  const getCtaLabel = (key: MultiplySectionContent['key']) => translate(`join.cta.${key}`)
 
   useEffect(() => {
     const updateScale = () => {
