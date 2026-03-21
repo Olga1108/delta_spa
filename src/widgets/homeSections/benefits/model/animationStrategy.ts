@@ -11,11 +11,19 @@ export const benefitsSectionAnimationStrategy: FullPageSectionAnimationStrategy 
     }
 
     if (title) {
-      timeline.to(title, { autoAlpha: 0, y: -18 * sign, duration: 0.22, ease: 'power2.out' }, at + 0.02)
+      timeline.to(
+        title,
+        { autoAlpha: 0, y: -18 * sign, duration: 0.22, ease: 'power2.out' },
+        at + 0.02,
+      )
     }
 
     if (text) {
-      timeline.to(text, { autoAlpha: 0, x: 28 * sign, duration: 0.2, ease: 'power2.out' }, at + 0.04)
+      timeline.to(
+        text,
+        { autoAlpha: 0, x: 28 * sign, duration: 0.2, ease: 'power2.out' },
+        at + 0.04,
+      )
     }
   },
   enter: ({ direction, timeline, at, targets, section }) => {

@@ -1,6 +1,6 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, redirect, RouterProvider } from 'react-router-dom'
 import { HomePage } from '@pages/home'
-import { NotFoundPage } from '@pages/notFound/ui/NotFoundPage'
+import { NotFoundPage } from '@pages/notFound'
 
 const router = createBrowserRouter([
   {
@@ -8,8 +8,12 @@ const router = createBrowserRouter([
     element: <HomePage />,
   },
   {
-    path: '*',
+    path: '/404',
     element: <NotFoundPage />,
+  },
+  {
+    path: '*',
+    loader: () => redirect('/404'),
   },
 ])
 

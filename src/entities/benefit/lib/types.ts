@@ -1,6 +1,4 @@
-export type BenefitData = {
-  title: string
-  description: string
-  benefits: string[]
-  [key: string]: unknown
-}
+import type { z } from 'zod'
+import type { benefitsResponseSchema } from './schema'
+
+export type BenefitData = z.infer<typeof benefitsResponseSchema>

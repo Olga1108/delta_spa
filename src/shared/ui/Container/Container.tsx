@@ -7,8 +7,8 @@ type ContainerProps = ComponentPropsWithoutRef<'div'> & {
   fullWidth?: boolean
 }
 
-const baseClasses =
-  'w-full mx-auto px-[var(--container-padding-x)] max-w-[var(--container-max-width)]'
+const baseClasses = 'w-full mx-auto px-[var(--container-padding-x)]'
+const constrainedWidthClasses = 'max-w-[var(--container-max-width)]'
 const fullWidthClasses = 'max-w-none'
 
 export function Container({
@@ -17,7 +17,9 @@ export function Container({
   className = '',
   ...rest
 }: ContainerProps) {
-  const containerClass = fullWidth ? `${baseClasses} ${fullWidthClasses}` : baseClasses
+  const containerClass = fullWidth
+    ? `${baseClasses} ${fullWidthClasses}`
+    : `${baseClasses} ${constrainedWidthClasses}`
   return (
     <div className={`${containerClass} ${className}`.trim()} {...rest}>
       {children}
