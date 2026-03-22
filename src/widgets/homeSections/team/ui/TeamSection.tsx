@@ -2,10 +2,10 @@ import { useTasksQuery } from '@entities/task'
 import { useDictionary } from '@shared/lib/dictionary'
 import { Container } from '@shared/ui/Container'
 import { SectionErrorState, SectionLoadingState } from '@shared/ui/SectionRequestState'
-import { BenefitTile } from './components/BenefitTile'
+import { TeamTile } from './components/TeamTile'
 import { SnakeIntroCard } from './components/SnakeIntroCard'
 
-export const BenefitsSection = () => {
+export const TeamSection = () => {
   const { locale, translate } = useDictionary()
   const { data, isLoading, isError, refetch } = useTasksQuery(locale)
   const tiles = data ? data.tiles.slice(0, 5) : []
@@ -31,7 +31,7 @@ export const BenefitsSection = () => {
 
             <div className="mt-4 space-y-4">
               {tiles.map((item, index) => (
-                <BenefitTile
+                <TeamTile
                   key={`${item.title}-${index}`}
                   title={item.title}
                   text={item.text}
@@ -60,7 +60,7 @@ export const BenefitsSection = () => {
 
               <div className="row-span-6 grid h-full grid-rows-2 gap-3">
                 {tiles.slice(0, 2).map((item, index) => (
-                  <BenefitTile
+                  <TeamTile
                     key={`${item.title}-${index}`}
                     title={item.title}
                     text={item.text}
@@ -72,7 +72,7 @@ export const BenefitsSection = () => {
 
               <div className="row-span-6 grid h-full grid-rows-3 gap-3">
                 {tiles.slice(2, 5).map((item, index) => (
-                  <BenefitTile
+                  <TeamTile
                     key={`${item.title}-${index}`}
                     title={item.title}
                     text={item.text}

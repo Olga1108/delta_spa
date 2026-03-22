@@ -56,7 +56,10 @@ export const MultiplySection = () => {
   }, [])
 
   return (
-    <Container fullWidth className="relative h-full w-full self-start pt-3 pb-8 md:self-stretch md:py-0">
+    <Container
+      fullWidth
+      className="relative h-full w-full self-start pt-3 pb-8 md:self-stretch md:py-0"
+    >
       {isError ? (
         <SectionErrorState
           title={translate('section.error.title')}
@@ -68,23 +71,23 @@ export const MultiplySection = () => {
         <SectionLoadingState />
       ) : (
         <>
-      <MultiplyDesktopLayout
-        scalePx={scalePx}
-        scaleFloatPx={scaleFloatPx}
-        titleBeforeHighlight={titleParts.before}
-        titleHighlight={titleParts.highlight}
-        titleAfterHighlight={titleParts.after}
-        description={data.description}
-        benefits={data.benefits}
-      />
-      <MultiplyMobileLayout
-        titleBeforeHighlight={titleParts.before}
-        titleHighlight={titleParts.highlight}
-        titleAfterHighlight={titleParts.after}
-        description={data.description}
-        benefits={data.benefits}
-      />
-      <MultiplyMarquee scalePx={scalePx} scaleFloatPx={scaleFloatPx} />
+          <MultiplyDesktopLayout
+            scalePx={scalePx}
+            scaleFloatPx={scaleFloatPx}
+            titleBeforeHighlight={titleParts.before}
+            titleHighlight={titleParts.highlight}
+            titleAfterHighlight={titleParts.after}
+            description={data.description}
+            benefits={data.benefits}
+          />
+          <MultiplyMobileLayout
+            titleBeforeHighlight={titleParts.before}
+            titleHighlight={titleParts.highlight}
+            titleAfterHighlight={titleParts.after}
+            description={data.description}
+            benefits={data.benefits}
+          />
+          <MultiplyMarquee scalePx={scalePx} scaleFloatPx={scaleFloatPx} />
         </>
       )}
     </Container>

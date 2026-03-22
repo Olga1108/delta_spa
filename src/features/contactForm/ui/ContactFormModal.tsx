@@ -128,7 +128,9 @@ export const ContactFormModal = ({ isOpen, onClose }: ContactFormModalProps) => 
                   placeholder={translate('form.name')}
                   className="h-11 w-full rounded-[9px] border border-[var(--color-purple-main)] bg-transparent px-3.5 font-body text-[16px] leading-none text-black placeholder:text-black/70 focus:outline-none focus:ring-1 focus:ring-[var(--color-purple-main)] md:h-12 md:text-[17px]"
                 />
-                {errors.name ? <p className="mt-1 text-xs text-red-600">{errors.name.message}</p> : null}
+                {errors.name ? (
+                  <p className="mt-1 text-xs text-red-600">{errors.name.message}</p>
+                ) : null}
               </div>
 
               <div className="grid grid-cols-1 gap-2.5 md:grid-cols-2 md:gap-3">
@@ -146,7 +148,9 @@ export const ContactFormModal = ({ isOpen, onClose }: ContactFormModalProps) => 
                   <span className="pointer-events-none relative -top-8 float-right mr-3 text-[13px] text-[var(--color-purple-main)]">
                     ▼
                   </span>
-                  {errors.method ? <p className="mt-1 text-xs text-red-600">{errors.method.message}</p> : null}
+                  {errors.method ? (
+                    <p className="mt-1 text-xs text-red-600">{errors.method.message}</p>
+                  ) : null}
                 </div>
 
                 <div>
@@ -156,7 +160,9 @@ export const ContactFormModal = ({ isOpen, onClose }: ContactFormModalProps) => 
                     placeholder={translate('form.contact')}
                     className="h-11 w-full rounded-[9px] border border-[var(--color-purple-main)] bg-transparent px-3.5 font-body text-[16px] leading-none text-black placeholder:text-black/70 focus:outline-none focus:ring-1 focus:ring-[var(--color-purple-main)] md:h-12 md:text-[17px]"
                   />
-                  {errors.contact ? <p className="mt-1 text-xs text-red-600">{errors.contact.message}</p> : null}
+                  {errors.contact ? (
+                    <p className="mt-1 text-xs text-red-600">{errors.contact.message}</p>
+                  ) : null}
                 </div>
               </div>
             </div>

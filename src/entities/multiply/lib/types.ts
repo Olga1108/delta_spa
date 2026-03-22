@@ -1,9 +1,5 @@
 import type { z } from 'zod'
-import type {
-  multiplyItemSchema,
-  multiplyResponseSchema,
-  multiplyStepSchema,
-} from './schema'
+import type { multiplyItemSchema, multiplyResponseSchema, multiplyStepSchema } from './schema'
 
 export type MultiplyStep = z.infer<typeof multiplyStepSchema>
 export type MultiplyItem = z.infer<typeof multiplyItemSchema>

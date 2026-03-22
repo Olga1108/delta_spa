@@ -1,7 +1,7 @@
 import type { FullPageSectionAnimationStrategy } from '@features/animations'
 import { getNamedTargets } from '../../lib/getNamedTargets'
 
-export const benefitsSectionAnimationStrategy: FullPageSectionAnimationStrategy = {
+export const teamSectionAnimationStrategy: FullPageSectionAnimationStrategy = {
   leave: ({ direction, timeline, at, section }) => {
     const { meta, title, text } = getNamedTargets(section)
     const textTargets = Array.from(section.querySelectorAll<HTMLElement>('[data-anim="text"]'))
@@ -26,7 +26,11 @@ export const benefitsSectionAnimationStrategy: FullPageSectionAnimationStrategy 
         at + 0.04,
       )
     } else if (text) {
-      timeline.to(text, { autoAlpha: 0, x: 28 * sign, duration: 0.2, ease: 'power2.out' }, at + 0.04)
+      timeline.to(
+        text,
+        { autoAlpha: 0, x: 28 * sign, duration: 0.2, ease: 'power2.out' },
+        at + 0.04,
+      )
     }
   },
   enter: ({ direction, timeline, at, targets, section }) => {

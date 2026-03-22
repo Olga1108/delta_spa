@@ -15,7 +15,11 @@ export const HeroSocialLinks = ({ className }: HeroSocialLinksProps) => {
           aria-label={item.label}
           onClick={(event) => event.preventDefault()}
         >
-          <img src={item.icon} alt="" className="h-6 w-6 opacity-90 transition-opacity hover:opacity-100" />
+          <img
+            src={item.icon}
+            alt=""
+            className="h-6 w-6 opacity-90 transition-opacity hover:opacity-100"
+          />
         </a>
       ))}
     </div>

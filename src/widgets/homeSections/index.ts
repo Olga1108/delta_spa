@@ -1,4 +1,4 @@
 export { HeroSection, heroSectionAnimationStrategy } from './hero'
-export { BenefitsSection, benefitsSectionAnimationStrategy } from './benefits'
+export { TeamSection, teamSectionAnimationStrategy } from './team'
 export { MultiplySection, multiplySectionAnimationStrategy } from './multiply'
 export { JoinSection, joinSectionAnimationStrategy } from './join'

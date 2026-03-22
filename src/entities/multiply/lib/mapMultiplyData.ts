@@ -15,15 +15,15 @@ const audienceMetaByTitle: Record<string, AudienceMeta> = {
     key: 'partners',
     buttonWidth: 406,
   },
-  'Медіабайерам': {
+  Медіабайерам: {
     key: 'media_buyers',
     buttonWidth: 484,
   },
-  'Бізнесу': {
+  Бізнесу: {
     key: 'businesses',
     buttonWidth: 451,
   },
-  'Партнерам': {
+  Партнерам: {
     key: 'partners',
     buttonWidth: 406,
   },
@@ -45,7 +45,8 @@ const fallbackAudienceMeta: AudienceMeta[] = [
 ]
 
 const mapMultiplyItem = (item: MultiplyItem, index: number): MultiplySectionContent => {
-  const meta = audienceMetaByTitle[item.title] ?? fallbackAudienceMeta[index] ?? fallbackAudienceMeta[0]
+  const meta =
+    audienceMetaByTitle[item.title] ?? fallbackAudienceMeta[index] ?? fallbackAudienceMeta[0]
 
   return {
     ...meta,
