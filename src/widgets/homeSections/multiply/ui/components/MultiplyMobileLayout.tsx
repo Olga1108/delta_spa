@@ -1,4 +1,6 @@
 import logoMain from '@shared/assets/Images/icons/logo-main.svg'
+import { useDictionary } from '@shared/lib/dictionary'
+import { useMobileHomeMenu } from '@shared/lib/useMobileHomeMenu'
 import { MultiplyMarquee } from './MultiplyMarquee'
 
 type MultiplyMobileLayoutProps = {
@@ -16,15 +18,19 @@ export const MultiplyMobileLayout = ({
   description,
   benefits,
 }: MultiplyMobileLayoutProps) => {
+  const { translate } = useDictionary()
+  const mobileMenu = useMobileHomeMenu()
+
   return (
     <div className="md:hidden">
       <div className="flex items-start justify-between">
         <img src={logoMain} alt="CPA logo" className="h-auto w-[26px]" />
         <button
           type="button"
+          onClick={() => mobileMenu?.open()}
           className="font-heading text-base font-[700] text-[var(--color-yellow)] uppercase underline underline-offset-4"
         >
-          Menu
+          {translate('header.menu.open')}
         </button>
       </div>
 

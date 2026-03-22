@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import type { MultiplySectionContent } from '@entities/multiply'
 import { mapMultiplyData, useMultiplyQuery } from '@entities/multiply'
 import { useDictionary } from '@shared/lib/dictionary'
@@ -25,6 +25,11 @@ export const JoinSection = () => {
   const getAudienceLabel = (key: MultiplySectionContent['key']) => translate(`join.audience.${key}`)
   const getCtaLabel = (key: MultiplySectionContent['key']) => translate(`join.cta.${key}`)
 
+  const safeActiveAudience = useMemo(
+    () => (items.length > 0 ? Math.min(activeAudience, items.length - 1) : 0),
+    [activeAudience, items.length],
+  )
+
   useEffect(() => {
     const updateScale = () => {
       setDesktopScale(getDesktopStageScale())
@@ -38,12 +43,6 @@ export const JoinSection = () => {
       window.removeEventListener('resize', updateScale)
     }
   }, [])
-
-  useEffect(() => {
-    if (activeAudience >= items.length) {
-      setActiveAudience(0)
-    }
-  }, [activeAudience, items.length])
 
   return (
     <Container
@@ -66,7 +65,7 @@ export const JoinSection = () => {
             getAudienceLabel={getAudienceLabel}
             desktopScale={desktopScale}
             desktopContentTop={desktopContentTop}
-            activeAudience={activeAudience}
+            activeAudience={safeActiveAudience}
             hoveredAudience={hoveredAudience}
             setActiveAudience={setActiveAudience}
             setHoveredAudience={setHoveredAudience}
@@ -81,7 +80,7 @@ export const JoinSection = () => {
 
           <JoinMobileLayout
             items={items}
-            activeAudience={activeAudience}
+            activeAudience={safeActiveAudience}
             setActiveAudience={setActiveAudience}
             getAudienceLabel={getAudienceLabel}
             getCtaLabel={getCtaLabel}

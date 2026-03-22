@@ -16,17 +16,52 @@
   --spacing-container: 80rem;
   --container-max-width: 80rem;
   --container-padding-x: 1rem;
+
+  /** Mobile hero / team full-bleed background (Figma radial). */
+  --gradient-mobile-radial: radial-gradient(
+    82.51% 134.92% at 44.01% 44.64%,
+    #14091a 0%,
+    #14091a 55.77%,
+    #220032 100%
+  );
+
+  /** Mobile hero section (Figma: layered linear + base). */
+  --gradient-hero-mobile:
+    linear-gradient(121.08deg, #9500dc -3.37%, #560080 56.37%, #220032 102.54%),
+    linear-gradient(0deg, #560080, #560080);
+
+  /** Team section desktop (full-page track). */
+  --gradient-team-desktop: linear-gradient(
+    111.06deg,
+    #14091a -3.49%,
+    #14091a 49.69%,
+    #220032 91.86%
+  );
+}
+
+@layer utilities {
+  .bg-mobile-radial {
+    background: var(--gradient-mobile-radial);
+  }
+
+  .bg-mobile {
+    background: var(--gradient-hero-mobile);
+  }
+
+  .bg-team-desktop {
+    background: var(--gradient-team-desktop);
+  }
 }
 
 @media (width >= 768px) {
   :root {
-    --container-padding-x: 1.5rem;
+    --container-padding-x: 2rem;
   }
 }
 
 @media (width >= 1280px) {
   :root {
-    --container-padding-x: 2rem;
+    --container-padding-x: 3rem;
   }
 }
 

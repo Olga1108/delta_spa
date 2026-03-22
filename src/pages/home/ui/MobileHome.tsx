@@ -1,15 +1,13 @@
-import { useState } from 'react'
 import { useBenefitsQuery } from '@entities/benefit'
 import { useMultiplyQuery } from '@entities/multiply'
 import { useTasksQuery } from '@entities/task'
-import { HeroMobileMenu } from '@widgets/homeSections/hero'
 import { useDictionary } from '@shared/lib/dictionary'
-import { Container } from '@shared/ui/Container'
+import { MobileHomeMenuProvider } from '@shared/lib/MobileHomeMenuProvider'
 import { SectionErrorState, SectionLoadingState } from '@shared/ui/SectionRequestState'
+import { HeroMobileMenuOverlay } from '@widgets/homeSections/hero'
 import { homeSections } from '../config/fullPageMock'
 
 export const MobileHome = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { locale, translate } = useDictionary()
   const benefitsQuery = useBenefitsQuery(locale)
   const multiplyQuery = useMultiplyQuery(locale)
@@ -45,28 +43,23 @@ export const MobileHome = () => {
   }
 
   return (
-    <main className="relative bg-black text-white">
-      <Container fullWidth className="fixed inset-x-0 top-0 z-50 md:hidden">
-        <HeroMobileMenu
-          isOpen={isMenuOpen}
-          onOpen={() => setIsMenuOpen(true)}
-          onClose={() => setIsMenuOpen(false)}
-        />
-      </Container>
-
-      {homeSections.map((section) => (
-        <section
-          key={section.id}
-          id={section.id}
-          className={`relative flex min-h-dvh bg-linear-to-b ${section.color} ${
-            section.id === 'multiply' || section.id === 'join'
-              ? 'items-start pt-0 pb-16'
-              : 'items-stretch py-0'
-          }`}
-        >
-          <section.Component />
-        </section>
-      ))}
-    </main>
+    <MobileHomeMenuProvider>
+      <main className="relative bg-black text-white">
+        {homeSections.map((section) => (
+          <section
+            key={section.id}
+            id={section.id}
+            className={`relative flex min-h-dvh bg-linear-to-b ${section.color} ${
+              section.id === 'multiply' || section.id === 'join'
+                ? 'items-start pt-0 pb-16'
+                : 'items-stretch py-0'
+            }`}
+          >
+            <section.Component />
+          </section>
+        ))}
+      </main>
+      <HeroMobileMenuOverlay />
+    </MobileHomeMenuProvider>
   )
 }

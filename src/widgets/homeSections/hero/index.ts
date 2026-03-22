@@ -1,3 +1,4 @@
 export { HeroSection } from './ui/HeroSection'
-export { HeroMobileMenu } from './ui/components/HeroMobileMenu'
+export { HeroMobileMenuBar } from './ui/components/HeroMobileMenuBar'
+export { HeroMobileMenuOverlay } from './ui/components/HeroMobileMenuOverlay'
 export { heroSectionAnimationStrategy } from './model/animationStrategy'

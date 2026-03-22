@@ -1,6 +1,8 @@
 import logoMain from '@shared/assets/Images/icons/logo-main.svg'
-import { ParallelogramButton } from '@shared/ui/ParallelogramButton'
 import type { MultiplySectionContent } from '@entities/multiply'
+import { useDictionary } from '@shared/lib/dictionary'
+import { useMobileHomeMenu } from '@shared/lib/useMobileHomeMenu'
+import { ParallelogramButton } from '@shared/ui/ParallelogramButton'
 import { LineArrow } from './LineArrow'
 
 type JoinMobileLayoutProps = {
@@ -19,6 +21,8 @@ export const JoinMobileLayout = ({
   getCtaLabel,
 }: JoinMobileLayoutProps) => {
   const currentItem = items[activeAudience] ?? items[0]
+  const { translate } = useDictionary()
+  const mobileMenu = useMobileHomeMenu()
 
   return (
     <div className="md:hidden">
@@ -26,9 +30,10 @@ export const JoinMobileLayout = ({
         <img src={logoMain} alt="CPA logo" className="h-auto w-[26px]" />
         <button
           type="button"
+          onClick={() => mobileMenu?.open()}
           className="font-heading text-base font-[700] text-[var(--color-yellow)] uppercase underline underline-offset-4"
         >
-          Menu
+          {translate('header.menu.open')}
         </button>
       </div>
 

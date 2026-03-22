@@ -1,52 +1,39 @@
+import { useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import logoImg from '@shared/assets/Images/icons/logo-main.svg'
 import { useDictionary } from '@shared/lib/dictionary'
+import { useMobileHomeMenu } from '@shared/lib/useMobileHomeMenu'
 import { useBasePath } from '@shared/lib/useBasePath'
 import { LocaleSwitcher } from '@shared/ui/LocaleSwitcher'
 import { heroMenuLinks } from '../../model/constants'
-import { HeroAnimatedBackground } from './HeroAnimatedBackground'
 import { HeroSocialLinks } from './HeroSocialLinks'
 
-type HeroMobileMenuProps = {
-  isOpen: boolean
-  onOpen: () => void
-  onClose: () => void
-}
-
-export const HeroMobileMenu = ({ isOpen, onOpen, onClose }: HeroMobileMenuProps) => {
+export const HeroMobileMenuOverlay = () => {
+  const ctx = useMobileHomeMenu()
   const { translate } = useDictionary()
   const basePath = useBasePath()
+  const isOpen = ctx?.isOpen ?? false
+  const onClose = ctx?.close ?? (() => {})
 
-  if (!isOpen) {
-    return (
-      <div className="flex items-center justify-between pt-4 pb-5 md:hidden">
-        <a
-          href={basePath}
-          className="focus-visible:outline focus-visible:ring-2 focus-visible:ring-white"
-        >
-          <img
-            src={logoImg}
-            alt="CPA"
-            width={26.238}
-            height={24}
-            className="h-[24px] w-[26.238px] shrink-0 object-contain"
-          />
-        </a>
-        <button
-          type="button"
-          onClick={onOpen}
-          className="align-middle text-right font-heading text-[16px] leading-[1] font-bold tracking-normal text-[var(--color-yellow)] uppercase underline decoration-solid underline-offset-4"
-        >
-          {translate('header.menu.open')}
-        </button>
-      </div>
-    )
+  useEffect(() => {
+    if (!isOpen) {
+      return
+    }
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = previousOverflow
+    }
+  }, [isOpen])
+
+  if (!ctx || !isOpen) {
+    return null
   }
 
-  return (
-    <div className="fixed inset-0 z-[60] flex flex-col px-4 pt-4 pb-5 md:hidden">
-      <HeroAnimatedBackground />
-      <div className="relative z-10 flex h-full flex-col">
-        <div className="flex items-center justify-between">
+  const overlay = (
+    <div className="fixed inset-0 z-[100] flex max-h-dvh flex-col overflow-hidden overscroll-behavior-none bg-mobile px-4 pt-4 pb-5 md:hidden">
+      <div className="relative z-10 flex min-h-0 flex-1 flex-col">
+        <div className="flex shrink-0 items-center justify-between">
           <a
             href={basePath}
             className="focus-visible:outline focus-visible:ring-2 focus-visible:ring-white"
@@ -69,9 +56,9 @@ export const HeroMobileMenu = ({ isOpen, onOpen, onClose }: HeroMobileMenuProps)
             x
           </button>
         </div>
-        <div className="flex flex-col flex-1 justify-end gap-10">
+        <div className="flex min-h-0 flex-1 flex-col justify-end gap-10 overflow-y-auto">
           <nav
-            className="mt-[10vh] flex flex-col items-center gap-10 text-center"
+            className="mt-[10vh] flex flex-col items-center gap-10 py-4 text-center"
             aria-label="Mobile menu"
           >
             {heroMenuLinks.map((item) => (
@@ -86,11 +73,13 @@ export const HeroMobileMenu = ({ isOpen, onOpen, onClose }: HeroMobileMenuProps)
             ))}
           </nav>
 
-          <HeroSocialLinks className="mt-auto flex items-center justify-center gap-8 pb-8" />
+          <HeroSocialLinks className="mt-auto flex shrink-0 items-center justify-center gap-8 pb-8" />
 
           <LocaleSwitcher variant="mobileMenu" />
         </div>
       </div>
     </div>
   )
+
+  return createPortal(overlay, document.body)
 }

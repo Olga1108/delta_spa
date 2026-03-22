@@ -14,7 +14,7 @@ type SnakeIntroCardProps = {
 export const SnakeIntroCard = ({ description, locale, variant }: SnakeIntroCardProps) => {
   if (variant === 'mobile') {
     return (
-      <article className="overflow-hidden rounded-[10px] bg-[linear-gradient(64.6deg,#9500DC_17.61%,#560080_57.18%,#220032_88.56%)] px-4 pt-5 pb-3 shadow-[0_8px_24px_rgba(0,0,0,0.28)]">
+      <article className="overflow-hidden rounded-[10px] bg-[linear-gradient(64.6deg,#220032_17.61%,#560080_57.18%,#9500DC_88.56%)] px-4 pt-5 pb-3]">
         <p className={snakeCardDescriptionClassName}>
           {renderWordsWithHighlight(description, locale)}
         </p>

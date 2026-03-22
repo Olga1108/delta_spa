@@ -25,7 +25,7 @@ export const heroSocialLinks = [
 
 export const heroMenuLinks = [
   { id: 'hero', labelKey: 'header.nav.main' },
-  { id: 'benefits', labelKey: 'header.nav.team' },
-  { id: 'multiply', labelKey: 'header.nav.benefits' },
+  { id: 'team', labelKey: 'header.nav.team' },
+  { id: 'multiply', labelKey: 'header.nav.multiply' },
   { id: 'join', labelKey: 'header.nav.join' },
 ] as const

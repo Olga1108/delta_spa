@@ -1,7 +1,9 @@
+import { useLayoutEffect, useRef, useState } from 'react'
 import { useTasksQuery } from '@entities/task'
 import { useDictionary } from '@shared/lib/dictionary'
 import { Container } from '@shared/ui/Container'
 import { SectionErrorState, SectionLoadingState } from '@shared/ui/SectionRequestState'
+import { HeroMobileMenuBar } from '@widgets/homeSections/hero'
 import { TeamTile } from './components/TeamTile'
 import { SnakeIntroCard } from './components/SnakeIntroCard'
 
@@ -9,11 +11,33 @@ export const TeamSection = () => {
   const { locale, translate } = useDictionary()
   const { data, isLoading, isError, refetch } = useTasksQuery(locale)
   const tiles = data ? data.tiles.slice(0, 5) : []
+  const teamMobileBlockRef = useRef<HTMLDivElement>(null)
+  const [isTeamHeaderSticky, setIsTeamHeaderSticky] = useState(true)
+
+  useLayoutEffect(() => {
+    const el = teamMobileBlockRef.current
+    if (!el) {
+      return
+    }
+
+    const updateSticky = () => {
+      const rect = el.getBoundingClientRect()
+      setIsTeamHeaderSticky(rect.bottom > window.innerHeight + 0.5)
+    }
+
+    updateSticky()
+    window.addEventListener('scroll', updateSticky, { passive: true })
+    window.addEventListener('resize', updateSticky)
+    return () => {
+      window.removeEventListener('scroll', updateSticky)
+      window.removeEventListener('resize', updateSticky)
+    }
+  }, [data])
 
   return (
     <Container
       fullWidth
-      className="relative h-full w-full self-start pt-0 pb-8 md:h-full md:self-stretch md:py-0"
+      className="relative flex h-full min-h-0 w-full flex-col self-stretch pt-0 pb-0 md:h-full md:self-stretch md:py-0"
     >
       {isError ? (
         <SectionErrorState
@@ -25,8 +49,19 @@ export const TeamSection = () => {
       ) : isLoading || !data ? (
         <SectionLoadingState />
       ) : (
-        <div className="relative -mx-[var(--container-padding-x)] px-[var(--container-padding-x)] py-7 md:h-full md:self-stretch md:py-10 bg-[linear-gradient(64.6deg,#9500DC_17.61%,#560080_57.18%,#220032_88.56%)] md:bg-[linear-gradient(111.06deg,#14091A_-3.49%,#14091A_49.69%,#220032_91.86%)]">
-          <div className="md:hidden">
+        <div
+          ref={teamMobileBlockRef}
+          className="relative -mx-[var(--container-padding-x)] flex min-h-dvh flex-col bg-[var(--color-purple-dark)] px-[var(--container-padding-x)] pt-0 pb-7 md:min-h-0 md:h-full md:self-stretch md:bg-team-desktop md:py-10"
+        >
+          <div className="flex flex-col md:hidden">
+            <div
+              className={`z-30 -mx-[var(--container-padding-x)] px-[var(--container-padding-x)] py-3 bg-[var(--color-purple-dark)] ${
+                isTeamHeaderSticky ? 'sticky top-0' : 'relative'
+              }`}
+            >
+              <HeroMobileMenuBar barClassName="!pt-0 !pb-0" />
+            </div>
+
             <SnakeIntroCard description={data.description} locale={locale} variant="mobile" />
 
             <div className="mt-4 space-y-4">

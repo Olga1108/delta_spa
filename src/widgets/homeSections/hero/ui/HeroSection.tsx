@@ -5,7 +5,8 @@ import { useDictionary } from '@shared/lib/dictionary'
 import { ParallelogramButton } from '@shared/ui/ParallelogramButton'
 import { Header } from '@widgets/header'
 import heroSnake from '@shared/assets/Images/hero/hero-image-main@1x.png'
-import { HeroAnimatedBackground } from './components/HeroAnimatedBackground'
+import { AnimatedBackground } from '@shared/ui/AnimatedBackground'
+import { HeroMobileMenuBar } from './components/HeroMobileMenuBar'
 import { HeroSocialLinks } from './components/HeroSocialLinks'
 
 export const HeroSection = () => {
@@ -13,15 +14,21 @@ export const HeroSection = () => {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false)
 
   return (
-    <div className="relative flex w-full min-h-screen min-h-dvh flex-col overflow-hidden md:h-full md:min-h-0 md:self-stretch">
-      <HeroAnimatedBackground />
+    <div className="relative flex w-full min-h-screen min-h-dvh flex-col overflow-hidden bg-mobile md:h-full md:min-h-0 md:self-stretch md:bg-transparent">
+      <div className="pointer-events-none absolute inset-0 hidden md:block">
+        <AnimatedBackground />
+      </div>
       <Container fullWidth className="relative z-10 flex min-h-0 flex-1 flex-col md:mb-8">
         <div data-anim="meta" className="hidden md:block">
           <Header />
         </div>
 
+        <div className="md:hidden">
+          <HeroMobileMenuBar />
+        </div>
+
         <div className="relative flex min-h-0 flex-1 flex-col gap-0 pt-0 pb-4 md:flex-row md:items-stretch md:gap-12 md:py-8 lg:gap-16">
-          <div className="z-10 flex max-md:mt-[100px] flex-col justify-start md:max-w-[66%] md:flex-1 md:justify-center">
+          <div className="z-10 flex flex-col justify-start md:max-w-[66%] md:flex-1 md:justify-center">
             <h1
               data-anim="title"
               className="max-w-[8.4em] font-heading text-[clamp(2.5rem,8vw,5rem)] font-bold leading-[0.9] tracking-[-1.74px] text-white uppercase md:max-w-[8.8em] md:text-[80px]"
