@@ -40,7 +40,7 @@ export const HeroMobileMenu = ({ isOpen, onOpen, onClose }: HeroMobileMenuProps)
   }
 
   return (
-    <div className="absolute inset-0 z-30 flex flex-col px-4 pt-4 pb-5 md:hidden">
+    <div className="fixed inset-0 z-[60] flex flex-col px-4 pt-4 pb-5 md:hidden">
       <HeroAnimatedBackground />
       <div className="relative z-10 flex h-full flex-col">
         <div className="flex items-center justify-between">

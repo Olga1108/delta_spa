@@ -1,3 +1,5 @@
 export { getTasks } from './api/getTasks'
 export { tasksResponseSchema, taskTileSchema } from './lib/schema'
-export type { TaskData } from './lib/types'
+export type { TaskData, TaskTile } from './lib/types'
+export { useTasksQuery } from './model/useTasksQuery'
+export { taskQueryKeys } from './model/queryKeys'

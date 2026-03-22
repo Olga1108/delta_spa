@@ -1,19 +1,16 @@
 import { useState } from 'react'
+import { ContactFormModal } from '@features/contactForm'
 import { Container } from '@shared/ui/Container'
 import { useDictionary } from '@shared/lib/dictionary'
 import { ParallelogramButton } from '@shared/ui/ParallelogramButton'
 import { Header } from '@widgets/header'
 import heroSnake from '@shared/assets/Images/hero/hero-image-main@1x.png'
 import { HeroAnimatedBackground } from './components/HeroAnimatedBackground'
-import { HeroMobileMenu } from './components/HeroMobileMenu'
 import { HeroSocialLinks } from './components/HeroSocialLinks'
 
 export const HeroSection = () => {
   const { translate } = useDictionary()
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const handleJoinClick = () => {
-    window.location.hash = 'join'
-  }
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false)
 
   return (
     <div className="relative flex w-full min-h-screen min-h-dvh flex-col overflow-hidden md:h-full md:min-h-0 md:self-stretch">
@@ -22,11 +19,6 @@ export const HeroSection = () => {
         <div data-anim="meta" className="hidden md:block">
           <Header />
         </div>
-        <HeroMobileMenu
-          isOpen={isMenuOpen}
-          onOpen={() => setIsMenuOpen(true)}
-          onClose={() => setIsMenuOpen(false)}
-        />
 
         <div className="relative flex min-h-0 flex-1 flex-col gap-0 pt-0 pb-4 md:flex-row md:items-stretch md:gap-12 md:py-8 lg:gap-16">
           <div className="z-10 flex max-md:mt-[100px] flex-col justify-start md:max-w-[66%] md:flex-1 md:justify-center">
@@ -45,7 +37,7 @@ export const HeroSection = () => {
             </p>
             <div className="mt-6 md:mt-8">
               <ParallelogramButton
-                onClick={handleJoinClick}
+                onClick={() => setIsContactModalOpen(true)}
                 width="clamp(17rem, 52vw, 21rem)"
                 height="clamp(5rem, 13vw, 5.75rem)"
                 className="text-[22px] leading-none tracking-[0.22em] text-[var(--color-black)] focus-visible:outline focus-visible:ring-2 focus-visible:ring-white md:text-[26px]"
@@ -66,6 +58,7 @@ export const HeroSection = () => {
 
         <HeroSocialLinks className="hidden shrink-0 items-center gap-6 pb-0 md:flex" />
       </Container>
+      <ContactFormModal isOpen={isContactModalOpen} onClose={() => setIsContactModalOpen(false)} />
     </div>
   )
 }
