@@ -1,3 +1,4 @@
+import logoMain from '@shared/assets/Images/icons/logo-main.svg'
 import { ParallelogramButton } from '@shared/ui/ParallelogramButton'
 import type { MultiplySectionContent } from '@entities/multiply'
 import { LineArrow } from './LineArrow'
@@ -20,8 +21,18 @@ export const JoinMobileLayout = ({
   const currentItem = items[activeAudience] ?? items[0]
 
   return (
-    <div className="space-y-6 md:hidden">
-      <div className="space-y-3">
+    <div className="md:hidden">
+      <div className="flex items-start justify-between">
+        <img src={logoMain} alt="CPA logo" className="h-auto w-[26px]" />
+        <button
+          type="button"
+          className="font-heading text-base font-[700] text-[var(--color-yellow)] uppercase underline underline-offset-4"
+        >
+          Menu
+        </button>
+      </div>
+
+      <div className="mt-10 space-y-5">
         {items.map((item, index) => {
           const isHighlighted = index === activeAudience
 
@@ -30,7 +41,7 @@ export const JoinMobileLayout = ({
               key={item.key}
               type="button"
               onClick={() => setActiveAudience(index)}
-              className="flex h-16 w-full items-center justify-between rounded-full border-2 px-8 font-heading text-[24px] leading-6"
+              className="flex h-16 w-full cursor-pointer items-center justify-between rounded-full border-2 px-8 font-heading text-[24px] leading-6"
               style={{
                 borderColor: isHighlighted ? 'var(--color-black)' : 'var(--color-yellow)',
                 backgroundColor: isHighlighted ? 'var(--color-yellow)' : 'transparent',
@@ -48,7 +59,7 @@ export const JoinMobileLayout = ({
         })}
       </div>
 
-      <div className="rounded-xl bg-[linear-gradient(133.8deg,#a30ee9_5.95%,#8a00cc_98.41%)] p-5 text-center text-white">
+      <div className="mt-8 rounded-xl bg-[linear-gradient(133.8deg,#a30ee9_5.95%,#8a00cc_98.41%)] p-5 text-center text-white">
         <div className="mx-auto max-w-[560px] space-y-4">
           <p className="font-heading text-xl leading-6 font-[500]">{currentItem.step1}</p>
           <div className="flex justify-center">
@@ -80,6 +91,10 @@ export const JoinMobileLayout = ({
           </ParallelogramButton>
         </div>
       </div>
+
+      <p className="mt-7 text-center font-heading text-[20px] font-[700] leading-none tracking-tight text-[var(--color-yellow)] uppercase">
+        MULTIPLY WITH US
+      </p>
     </div>
   )
 }

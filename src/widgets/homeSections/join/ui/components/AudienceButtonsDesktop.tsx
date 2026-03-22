@@ -47,7 +47,7 @@ export const AudienceButtonsDesktop = ({
             onFocus={() => setHoveredAudience(index)}
             onBlur={() => setHoveredAudience(null)}
             onClick={() => setActiveAudience(index)}
-            className="relative flex items-center rounded-full font-heading transition-colors duration-200 ease-out"
+            className="relative flex cursor-pointer items-center rounded-full font-heading transition-colors duration-200 ease-out"
             style={{
               width: `${((item.buttonWidth / 511) * 100).toFixed(3)}%`,
               height: scaleLeftPx(80),
@@ -63,7 +63,7 @@ export const AudienceButtonsDesktop = ({
               className="block overflow-hidden text-ellipsis whitespace-nowrap font-[500]"
               style={{
                 fontSize: scaleLeftPx(28),
-                lineHeight: scaleLeftPx(24),
+                lineHeight: scaleLeftPx(30),
                 maxWidth: `calc(100% - ${textRightReserve.toFixed(3)}px)`,
               }}
             >

@@ -1,4 +1,5 @@
 import type { MultiplySectionContent } from '@entities/multiply'
+import snakeBottomImage from '@shared/assets/Images/hero/hero-decor-aqsu@1x.png'
 import { AudienceButtonsDesktop } from './AudienceButtonsDesktop'
 import { JoinFooterDesktop } from './JoinFooterDesktop'
 import { JoinInfoPanelDesktop } from './JoinInfoPanelDesktop'
@@ -87,7 +88,29 @@ export const JoinDesktopLayout = ({
         />
       </div>
 
-      <JoinFooterDesktop desktopScale={desktopScale} scalePx={scalePx} />
+      <img
+        src={snakeBottomImage}
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none absolute bottom-0 left-0 hidden w-[48.6875rem] max-w-none select-none 2xl:block"
+      />
+
+      <JoinFooterDesktop
+        desktopScale={desktopScale}
+        scalePx={scalePx}
+        className="absolute right-[30px] bottom-[20px] left-[30px] flex items-end justify-between text-[var(--color-yellow)] 2xl:hidden"
+      />
+
+      <div
+        className="absolute right-[30px] bottom-[20px] left-[30px] hidden items-end 2xl:grid"
+        style={{
+          gridTemplateColumns: 'minmax(0, 2fr) minmax(0, 3fr)',
+          columnGap: scalePx(21),
+        }}
+      >
+        <div />
+        <JoinFooterDesktop desktopScale={desktopScale} scalePx={scalePx} className="relative" />
+      </div>
     </div>
   )
 }
