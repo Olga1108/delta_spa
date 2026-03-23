@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import type { MultiplySectionContent } from '@entities/multiply'
 import { mapMultiplyData, useMultiplyQuery } from '@entities/multiply'
 import { useDictionary } from '@shared/lib/dictionary'
@@ -25,6 +25,11 @@ export const JoinSection = () => {
   const getAudienceLabel = (key: MultiplySectionContent['key']) => translate(`join.audience.${key}`)
   const getCtaLabel = (key: MultiplySectionContent['key']) => translate(`join.cta.${key}`)
 
+  const safeActiveAudience = useMemo(
+    () => (items.length > 0 ? Math.min(activeAudience, items.length - 1) : 0),
+    [activeAudience, items.length],
+  )
+
   useEffect(() => {
     const updateScale = () => {
       setDesktopScale(getDesktopStageScale())
@@ -39,14 +44,11 @@ export const JoinSection = () => {
     }
   }, [])
 
-  useEffect(() => {
-    if (activeAudience >= items.length) {
-      setActiveAudience(0)
-    }
-  }, [activeAudience, items.length])
-
   return (
-    <Container fullWidth className="relative h-full w-full self-start pt-3 pb-8 md:self-stretch md:py-0">
+    <Container
+      fullWidth
+      className="relative h-full w-full self-start pt-3 pb-8 md:self-stretch md:py-0"
+    >
       {isError ? (
         <SectionErrorState
           title={translate('section.error.title')}
@@ -58,31 +60,31 @@ export const JoinSection = () => {
         <SectionLoadingState />
       ) : (
         <>
-      <JoinDesktopLayout
-        items={items}
-        getAudienceLabel={getAudienceLabel}
-        desktopScale={desktopScale}
-        desktopContentTop={desktopContentTop}
-        activeAudience={activeAudience}
-        hoveredAudience={hoveredAudience}
-        setActiveAudience={setActiveAudience}
-        setHoveredAudience={setHoveredAudience}
-        scalePx={scalePx}
-        scaleFloatPx={scaleFloatPx}
-        leftBlockScale={leftBlockScale}
-        scaleLeftPx={scaleLeftPx}
-        rightTextSize={rightTextSize}
-        rightArrowSize={rightArrowSize}
-        getCtaLabel={getCtaLabel}
-      />
+          <JoinDesktopLayout
+            items={items}
+            getAudienceLabel={getAudienceLabel}
+            desktopScale={desktopScale}
+            desktopContentTop={desktopContentTop}
+            activeAudience={safeActiveAudience}
+            hoveredAudience={hoveredAudience}
+            setActiveAudience={setActiveAudience}
+            setHoveredAudience={setHoveredAudience}
+            scalePx={scalePx}
+            scaleFloatPx={scaleFloatPx}
+            leftBlockScale={leftBlockScale}
+            scaleLeftPx={scaleLeftPx}
+            rightTextSize={rightTextSize}
+            rightArrowSize={rightArrowSize}
+            getCtaLabel={getCtaLabel}
+          />
 
-      <JoinMobileLayout
-        items={items}
-        activeAudience={activeAudience}
-        setActiveAudience={setActiveAudience}
-        getAudienceLabel={getAudienceLabel}
-        getCtaLabel={getCtaLabel}
-      />
+          <JoinMobileLayout
+            items={items}
+            activeAudience={safeActiveAudience}
+            setActiveAudience={setActiveAudience}
+            getAudienceLabel={getAudienceLabel}
+            getCtaLabel={getCtaLabel}
+          />
         </>
       )}
     </Container>

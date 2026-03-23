@@ -1,9 +1,10 @@
 import type { FullPageSectionAnimationStrategy } from '@features/animations'
 import { getNamedTargets } from '../../lib/getNamedTargets'
 
-export const benefitsSectionAnimationStrategy: FullPageSectionAnimationStrategy = {
+export const teamSectionAnimationStrategy: FullPageSectionAnimationStrategy = {
   leave: ({ direction, timeline, at, section }) => {
     const { meta, title, text } = getNamedTargets(section)
+    const textTargets = Array.from(section.querySelectorAll<HTMLElement>('[data-anim="text"]'))
     const sign = direction === 'down' ? 1 : -1
 
     if (meta) {
@@ -18,7 +19,13 @@ export const benefitsSectionAnimationStrategy: FullPageSectionAnimationStrategy 
       )
     }
 
-    if (text) {
+    if (textTargets.length > 0) {
+      timeline.to(
+        textTargets,
+        { autoAlpha: 0, x: 28 * sign, duration: 0.2, ease: 'power2.out', stagger: 0.03 },
+        at + 0.04,
+      )
+    } else if (text) {
       timeline.to(
         text,
         { autoAlpha: 0, x: 28 * sign, duration: 0.2, ease: 'power2.out' },
@@ -28,6 +35,7 @@ export const benefitsSectionAnimationStrategy: FullPageSectionAnimationStrategy 
   },
   enter: ({ direction, timeline, at, targets, section }) => {
     const { meta, title, text } = getNamedTargets(section)
+    const textTargets = Array.from(section.querySelectorAll<HTMLElement>('[data-anim="text"]'))
     const sign = direction === 'down' ? 1 : -1
 
     if (meta) {
@@ -48,7 +56,14 @@ export const benefitsSectionAnimationStrategy: FullPageSectionAnimationStrategy 
       )
     }
 
-    if (text) {
+    if (textTargets.length > 0) {
+      timeline.fromTo(
+        textTargets,
+        { autoAlpha: 0, x: 40 * sign },
+        { autoAlpha: 1, x: 0, duration: 0.34, ease: 'power2.out', stagger: 0.04 },
+        at + 0.12,
+      )
+    } else if (text) {
       timeline.fromTo(
         text,
         { autoAlpha: 0, x: 40 * sign },

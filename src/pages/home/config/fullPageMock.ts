@@ -1,18 +1,18 @@
 import type { ComponentType } from 'react'
 import type { FullPageSectionAnimationStrategy } from '@features/animations'
 import {
-  BenefitsSectionMock,
-  HeroSectionMock,
+  TeamSection,
+  HeroSection,
   JoinSection,
   MultiplySection,
-  benefitsSectionAnimationStrategy,
+  teamSectionAnimationStrategy,
   heroSectionAnimationStrategy,
   joinSectionAnimationStrategy,
   multiplySectionAnimationStrategy,
 } from '@widgets/homeSections'
 
 export type HomeSectionConfig = {
-  id: 'hero' | 'benefits' | 'multiply' | 'join'
+  id: 'hero' | 'team' | 'multiply' | 'join'
   color: string
   Component: ComponentType
 }
@@ -21,12 +21,12 @@ export const homeSections: HomeSectionConfig[] = [
   {
     id: 'hero',
     color: 'from-fuchsia-700 via-purple-700 to-purple-900',
-    Component: HeroSectionMock,
+    Component: HeroSection,
   },
   {
-    id: 'benefits',
+    id: 'team',
     color: 'from-indigo-700 via-indigo-800 to-slate-900',
-    Component: BenefitsSectionMock,
+    Component: TeamSection,
   },
   {
     id: 'multiply',
@@ -46,7 +46,7 @@ export const homeSectionAnimationStrategies: Partial<
   Record<HomeSectionConfig['id'], FullPageSectionAnimationStrategy>
 > = {
   hero: heroSectionAnimationStrategy,
-  benefits: benefitsSectionAnimationStrategy,
+  team: teamSectionAnimationStrategy,
   multiply: multiplySectionAnimationStrategy,
   join: joinSectionAnimationStrategy,
 }

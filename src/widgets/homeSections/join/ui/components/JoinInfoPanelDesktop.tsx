@@ -50,7 +50,7 @@ export const JoinInfoPanelDesktop = ({
             alignItems: 'center',
             justifyContent: 'center',
           }}
-          >
+        >
           {step1}
         </p>
 
@@ -71,7 +71,7 @@ export const JoinInfoPanelDesktop = ({
             alignItems: 'center',
             justifyContent: 'center',
           }}
-          >
+        >
           {step2}
         </p>
 

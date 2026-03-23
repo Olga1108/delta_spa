@@ -97,7 +97,9 @@ export const MultiplyDesktopLayout = ({
                     padding: scalePx(20),
                     fontSize: scalePx(20),
                     lineHeight: scalePx(24),
-                    minHeight: scalePx(benefitCardDesktopHeights[index] ?? benefitCardDesktopHeights.at(-1) ?? 64),
+                    minHeight: scalePx(
+                      benefitCardDesktopHeights[index] ?? benefitCardDesktopHeights.at(-1) ?? 64,
+                    ),
                     display: 'flex',
                     alignItems: 'center',
                   }}

@@ -109,11 +109,7 @@ export const createApiClient = ({ baseUrl, requestInterceptors = [] }: CreateApi
       method: 'POST',
     })
 
-  const postValidated = <TOutput>(
-    path: string,
-    schema: ZodType<TOutput>,
-    init: RequestInit = {},
-  ) =>
+  const postValidated = <TOutput>(path: string, schema: ZodType<TOutput>, init: RequestInit = {}) =>
     requestValidated(path, schema, {
       ...init,
       method: 'POST',

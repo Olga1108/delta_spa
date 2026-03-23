@@ -8,6 +8,10 @@ const router = createBrowserRouter([
     element: <HomePage />,
   },
   {
+    path: '/ua',
+    element: <HomePage />,
+  },
+  {
     path: '/404',
     element: <NotFoundPage />,
   },
