@@ -24,13 +24,14 @@ Source: `src/shared/config/api.ts`
 - `API_KEY` from `VITE_API_KEY` (required)
 
 If `VITE_API_KEY` is missing or empty, the app throws an error at startup.
-Add it to `.env.local` (or your environment config in CI/CD).
+Add it to `.env.local` or an untracked `.env.development` / `.env.production` file (or your
+environment config in CI/CD).
 
 Example:
 
 ```env
 VITE_API_BASE_URL=/api
-VITE_API_KEY=prodcpakey333
+VITE_API_KEY=replace-with-your-api-key
 ```
 
 ## Interceptors
