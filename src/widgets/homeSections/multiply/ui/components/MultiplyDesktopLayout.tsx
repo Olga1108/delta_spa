@@ -1,4 +1,5 @@
 import snakeImage from '@shared/assets/Images/hero/hero-image-05@1x.svg'
+import { SectionMetaHeading } from '@widgets/homeSections/shared/ui/SectionMetaHeading'
 import { benefitCardDesktopHeights, desktopLayout } from '../constants'
 
 type MultiplyDesktopLayoutProps = {
@@ -21,24 +22,23 @@ export const MultiplyDesktopLayout = ({
   benefits,
 }: MultiplyDesktopLayoutProps) => {
   return (
-    <div className="relative hidden h-full w-full md:block">
-      <div className="absolute inset-0 overflow-visible">
-        <p
-          data-anim="meta"
-          className="absolute text-center font-heading font-[500] text-[var(--color-yellow)] uppercase"
+    <div className='relative hidden h-full w-full md:block'>
+      <div className='absolute inset-0 overflow-visible'>
+        <SectionMetaHeading
+          className='absolute text-center'
+          as='h3'
           style={{
             top: `${desktopLayout.label.top}px`,
             right: `${desktopLayout.label.right}px`,
             fontSize: scalePx(30),
             lineHeight: scaleFloatPx(27),
-            letterSpacing: scaleFloatPx(-1.7422),
           }}
         >
           MULTI-BENEFITS
-        </p>
+        </SectionMetaHeading>
 
         <div
-          className="absolute"
+          className='absolute'
           style={{
             top: `${desktopLayout.left.top}px`,
             left: `${desktopLayout.left.left}px`,
@@ -46,17 +46,17 @@ export const MultiplyDesktopLayout = ({
           }}
         >
           <h2
-            data-anim="title"
-            className="font-heading font-[500] text-white"
+            data-anim='title'
+            className='font-heading font-[500] text-white'
             style={{ fontSize: scalePx(40), lineHeight: scalePx(40) }}
           >
             {titleBeforeHighlight}
-            <span className="text-[var(--color-yellow)]">{titleHighlight}</span>
+            <span className='text-[var(--color-yellow)]'>{titleHighlight}</span>
             {titleAfterHighlight}
           </h2>
           <p
-            data-anim="text"
-            className="mt-5 font-heading font-[500] text-white"
+            data-anim='text'
+            className='mt-5 font-heading font-[500] text-white'
             style={{
               width: scalePx(510),
               fontSize: scalePx(16),
@@ -68,16 +68,16 @@ export const MultiplyDesktopLayout = ({
         </div>
 
         <div
-          className="absolute"
+          className='absolute'
           style={{
             top: `${desktopLayout.right.top}px`,
             right: `${desktopLayout.right.right}px`,
             width: scalePx(desktopLayout.right.width),
           }}
         >
-          <div className="relative">
+          <div className='relative'>
             <div
-              className="pointer-events-none absolute z-10 flex items-center justify-center"
+              className='pointer-events-none absolute z-10 flex items-center justify-center'
               style={{
                 top: scalePx(desktopLayout.snake.top),
                 left: scalePx(desktopLayout.snake.left),
@@ -85,14 +85,14 @@ export const MultiplyDesktopLayout = ({
                 height: scalePx(desktopLayout.snake.size),
               }}
             >
-              <img src={snakeImage} alt="Purple snake" className="h-full w-full object-contain" />
+              <img src={snakeImage} alt='Purple snake' className='h-full w-full object-contain' />
             </div>
 
-            <div className="relative z-20" style={{ rowGap: scalePx(20), display: 'grid' }}>
+            <div className='relative z-20' style={{ rowGap: scalePx(20), display: 'grid' }}>
               {benefits.map((benefit, index) => (
                 <p
                   key={benefit}
-                  className="rounded-lg bg-[var(--color-purple-main)] font-heading font-[500] text-white transition-colors duration-200 ease-out md:hover:bg-[var(--color-yellow)] md:hover:text-[var(--color-black)]"
+                  className='rounded-lg bg-[var(--color-purple-main)] font-heading font-[500] text-white transition-colors duration-200 ease-out md:hover:bg-[var(--color-yellow)] md:hover:text-[var(--color-black)]'
                   style={{
                     padding: scalePx(20),
                     fontSize: scalePx(20),

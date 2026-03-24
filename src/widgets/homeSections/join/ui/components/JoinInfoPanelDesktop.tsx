@@ -22,8 +22,8 @@ export const JoinInfoPanelDesktop = ({
 }: JoinInfoPanelDesktopProps) => {
   return (
     <div
-      data-anim="title"
-      className="rounded-xl"
+      data-anim='title'
+      className='rounded-xl'
       style={{
         width: '100%',
         height: scalePx(512),
@@ -32,7 +32,7 @@ export const JoinInfoPanelDesktop = ({
       }}
     >
       <div
-        className="mx-auto flex flex-col items-center text-center"
+        className='mx-auto flex flex-col items-center text-center'
         style={{
           width: '100%',
           maxWidth: scalePx(560),
@@ -41,7 +41,7 @@ export const JoinInfoPanelDesktop = ({
         }}
       >
         <p
-          className="font-heading font-[500] text-white"
+          className='font-heading font-[500] text-white'
           style={{
             fontSize: `${rightTextSize}px`,
             lineHeight: scalePx(24),
@@ -56,13 +56,13 @@ export const JoinInfoPanelDesktop = ({
 
         <LineArrow
           width={rightArrowSize}
-          color="var(--color-black)"
+          color='var(--color-black)'
           strokeWidth={2.4}
-          className="rotate-90"
+          className='rotate-90'
         />
 
         <p
-          className="font-heading font-[500] text-white"
+          className='font-heading font-[500] text-white'
           style={{
             fontSize: `${rightTextSize}px`,
             lineHeight: scalePx(24),
@@ -77,13 +77,13 @@ export const JoinInfoPanelDesktop = ({
 
         <LineArrow
           width={rightArrowSize}
-          color="var(--color-black)"
+          color='var(--color-black)'
           strokeWidth={2.4}
-          className="rotate-90"
+          className='rotate-90'
         />
 
         <ParallelogramButton
-          className="mt-[2px] text-[var(--color-black)]"
+          className='mt-[2px] text-[var(--color-black)]'
           width={330 * desktopScale}
           height={82 * desktopScale}
           faceHeight={72 * desktopScale}

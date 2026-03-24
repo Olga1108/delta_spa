@@ -15,8 +15,8 @@ export const MobileHome = () => {
 
   if (benefitsQuery.isLoading || multiplyQuery.isLoading || tasksQuery.isLoading) {
     return (
-      <main className="bg-black text-white">
-        <section className="relative flex min-h-dvh items-center justify-center bg-[linear-gradient(122deg,#dc8400_2%,#560080_50%,#220032_92%)]">
+      <main className='bg-black text-white'>
+        <section className='relative flex min-h-dvh items-center justify-center bg-[linear-gradient(122deg,#dc8400_2%,#560080_50%,#220032_92%)]'>
           <SectionLoadingState />
         </section>
       </main>
@@ -25,8 +25,8 @@ export const MobileHome = () => {
 
   if (benefitsQuery.isError || multiplyQuery.isError || tasksQuery.isError) {
     return (
-      <main className="bg-black text-white">
-        <section className="relative flex min-h-dvh items-center justify-center bg-[linear-gradient(122deg,#dc8400_2%,#560080_50%,#220032_92%)]">
+      <main className='bg-black text-white'>
+        <section className='relative flex min-h-dvh items-center justify-center bg-[linear-gradient(122deg,#dc8400_2%,#560080_50%,#220032_92%)]'>
           <SectionErrorState
             title={translate('section.error.title')}
             description={translate('section.error.description')}
@@ -44,7 +44,7 @@ export const MobileHome = () => {
 
   return (
     <MobileHomeMenuProvider>
-      <main className="relative bg-black text-white">
+      <main className='relative bg-black text-white'>
         {homeSections.map((section) => (
           <section
             key={section.id}

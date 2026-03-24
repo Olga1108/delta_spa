@@ -1,5 +1,6 @@
 import type { MultiplySectionContent } from '@entities/multiply'
 import snakeBottomImage from '@shared/assets/Images/hero/hero-decor-aqsu@1x.png'
+import { SectionMetaHeading } from '@widgets/homeSections/shared/ui/SectionMetaHeading'
 import { AudienceButtonsDesktop } from './AudienceButtonsDesktop'
 import { JoinFooterDesktop } from './JoinFooterDesktop'
 import { JoinInfoPanelDesktop } from './JoinInfoPanelDesktop'
@@ -42,23 +43,22 @@ export const JoinDesktopLayout = ({
   const currentItem = items[activeAudience] ?? items[0]
 
   return (
-    <div className="relative hidden h-full w-full md:block">
-      <p
-        data-anim="meta"
-        className="absolute font-heading font-[500] text-[var(--color-yellow)] uppercase"
+    <div className='relative hidden h-full w-full md:block'>
+      <SectionMetaHeading
+        className='absolute'
+        as='h3'
         style={{
           top: '20px',
           right: '30px',
           fontSize: scalePx(30),
           lineHeight: scaleFloatPx(27),
-          letterSpacing: scaleFloatPx(-1.7422),
         }}
       >
         MULTIPLY WITH US
-      </p>
+      </SectionMetaHeading>
 
       <div
-        className="absolute grid items-start"
+        className='absolute grid items-start'
         style={{
           top: `${desktopContentTop}px`,
           left: '30px',
@@ -90,26 +90,26 @@ export const JoinDesktopLayout = ({
 
       <img
         src={snakeBottomImage}
-        alt=""
-        aria-hidden="true"
-        className="pointer-events-none absolute bottom-0 left-0 hidden w-[48.6875rem] max-w-none select-none 2xl:block"
+        alt=''
+        aria-hidden='true'
+        className='pointer-events-none absolute bottom-0 left-0 hidden w-[48.6875rem] max-w-none select-none 2xl:block'
       />
 
       <JoinFooterDesktop
         desktopScale={desktopScale}
         scalePx={scalePx}
-        className="absolute right-[30px] bottom-[20px] left-[30px] flex items-end justify-between text-[var(--color-yellow)] 2xl:hidden"
+        className='absolute right-[30px] bottom-[20px] left-[30px] flex items-end justify-between text-[var(--color-yellow)] 2xl:hidden'
       />
 
       <div
-        className="absolute right-[30px] bottom-[20px] left-[30px] hidden items-end 2xl:grid"
+        className='absolute right-[30px] bottom-[20px] left-[30px] hidden items-end 2xl:grid'
         style={{
           gridTemplateColumns: 'minmax(0, 2fr) minmax(0, 3fr)',
           columnGap: scalePx(21),
         }}
       >
         <div />
-        <JoinFooterDesktop desktopScale={desktopScale} scalePx={scalePx} className="relative" />
+        <JoinFooterDesktop desktopScale={desktopScale} scalePx={scalePx} className='relative' />
       </div>
     </div>
   )

@@ -13,10 +13,10 @@ export const MultiplyMarquee = ({
 }: MultiplyMarqueeProps) => {
   if (mobile) {
     return (
-      <div className="overflow-x-clip md:hidden">
-        <div className="w-full rotate-[3deg] overflow-hidden border-y-[1.5px] border-[var(--color-yellow)] py-[5px]">
+      <div className='overflow-x-clip md:hidden'>
+        <div className='w-full rotate-[3deg] overflow-hidden border-y-[1.5px] border-[var(--color-yellow)] py-[5px]'>
           <div
-            className="section-marquee-track inline-flex h-[40px] w-max items-center font-heading text-[35px] font-[300] leading-none text-[var(--color-yellow)]"
+            className='section-marquee-track inline-flex h-[40px] w-max items-center font-heading text-[35px] font-[300] leading-none text-[var(--color-yellow)]'
             style={{ animationDuration: '15s' }}
           >
             <MultiplyMarqueeContent mobile />
@@ -28,10 +28,10 @@ export const MultiplyMarquee = ({
   }
 
   return (
-    <div className="hidden md:absolute md:right-0 md:bottom-[44px] md:left-0 md:mt-0 md:block">
-      <div className="overflow-hidden border-y-2 border-[var(--color-yellow)] py-2 md:w-[calc(100%+96px)] md:origin-center md:-translate-x-12 md:rotate-[2.2deg] md:py-0">
+    <div className='hidden md:absolute md:right-0 md:bottom-[44px] md:left-0 md:mt-0 md:block'>
+      <div className='overflow-hidden border-y-2 border-[var(--color-yellow)] py-2 md:w-[calc(100%+96px)] md:origin-center md:-translate-x-12 md:rotate-[2.2deg] md:py-0'>
         <div
-          className="section-marquee-track inline-flex h-full w-max items-center font-heading text-4xl font-[500] leading-none text-[var(--color-yellow)] md:text-[56px]"
+          className='section-marquee-track inline-flex h-full w-max items-center font-heading text-4xl font-[500] leading-none text-[var(--color-yellow)] md:text-[56px]'
           style={{
             height: scalePx(78),
             fontSize: scaleFloatPx(52.5),
