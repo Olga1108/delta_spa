@@ -1,0 +1,82 @@
+@property --animated-bg-hole-x {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: -10%;
+}
+
+@property --animated-bg-hole-y {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 50%;
+}
+
+.animated-bg {
+  --animated-bg-hole-r: calc(33dvh + 100px);
+  --animated-bg-hole-x: -10%;
+  --animated-bg-hole-y: 50%;
+}
+
+.animated-bg__layer {
+  position: absolute;
+  inset: 0;
+}
+
+.animated-bg__base {
+  background: linear-gradient(111.06deg, #dc8400 -3.49%, #560080 49.69%, #220032 91.86%);
+}
+
+.animated-bg__grid {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.38;
+}
+
+.animated-bg__overlay {
+  background: linear-gradient(111.06deg, #dc8400 -3.49%, #560080 49.69%, #220032 91.86%);
+  -webkit-mask-image: radial-gradient(
+    circle var(--animated-bg-hole-r) at var(--animated-bg-hole-x) var(--animated-bg-hole-y),
+    transparent 0%,
+    rgba(0, 0, 0, 0.08) 52%,
+    rgba(0, 0, 0, 0.45) 68%,
+    #000 80%
+  );
+  mask-image: radial-gradient(
+    circle var(--animated-bg-hole-r) at var(--animated-bg-hole-x) var(--animated-bg-hole-y),
+    transparent 0%,
+    rgba(0, 0, 0, 0.08) 52%,
+    rgba(0, 0, 0, 0.45) 68%,
+    #000 80%
+  );
+  animation: animated-bg-hole-path 20s ease-in-out infinite;
+}
+
+@keyframes animated-bg-hole-path {
+  0%,
+  18% {
+    --animated-bg-hole-x: -10%;
+    --animated-bg-hole-y: 50%;
+  }
+  34% {
+    --animated-bg-hole-x: 102%;
+    --animated-bg-hole-y: 8%;
+  }
+  50% {
+    --animated-bg-hole-x: -10%;
+    --animated-bg-hole-y: 50%;
+  }
+  76% {
+    --animated-bg-hole-x: 102%;
+    --animated-bg-hole-y: 92%;
+  }
+  100% {
+    --animated-bg-hole-x: -10%;
+    --animated-bg-hole-y: 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animated-bg__overlay {
+    animation: none;
+  }
+}

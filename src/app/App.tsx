@@ -1,10 +1,11 @@
+import { AppRouterProvider } from './providers/RouterProvider'
+import { AppQueryProvider } from './providers/QueryProvider'
+
 function App() {
-
-
   return (
-    <>
-      <h1>Vite + React</h1>
-    </>
+    <AppQueryProvider>
+      <AppRouterProvider />
+    </AppQueryProvider>
   )
 }
 
