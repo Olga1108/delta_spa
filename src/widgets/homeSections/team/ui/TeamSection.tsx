@@ -68,7 +68,6 @@ export const TeamSection = () => {
             description={data.description}
             locale={locale}
             tiles={tiles}
-            benefitsLabel={translate('benefits.multiTasks')}
           />
 
           <div className='relative hidden h-full md:block'>

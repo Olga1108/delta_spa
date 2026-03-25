@@ -15,7 +15,8 @@ const getWindowViewport = (): ViewportSnapshot => ({
   height: window.innerHeight,
 })
 
-let currentViewport: ViewportSnapshot = DEFAULT_VIEWPORT
+let currentViewport: ViewportSnapshot =
+  typeof window === 'undefined' ? DEFAULT_VIEWPORT : getWindowViewport()
 const listeners = new Set<() => void>()
 let isListening = false
 
@@ -64,6 +65,21 @@ const subscribe = (listener: () => void) => {
   }
 }
 
-const getSnapshot = () => (typeof window === 'undefined' ? DEFAULT_VIEWPORT : currentViewport)
+const getSnapshot = () => {
+  if (typeof window === 'undefined') {
+    return DEFAULT_VIEWPORT
+  }
+
+  // Keep first client render in sync with actual viewport.
+  const windowViewport = getWindowViewport()
+  if (
+    windowViewport.width !== currentViewport.width ||
+    windowViewport.height !== currentViewport.height
+  ) {
+    currentViewport = windowViewport
+  }
+
+  return currentViewport
+}
 
 export const useViewport = () => useSyncExternalStore(subscribe, getSnapshot, () => DEFAULT_VIEWPORT)
