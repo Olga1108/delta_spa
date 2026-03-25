@@ -9,15 +9,13 @@ type TeamSectionMobileProps = {
   description: string
   locale: UiLocale
   tiles: TeamSectionTile[]
-  benefitsLabel: string
 }
 
 export const TeamSectionMobile = ({
   isTeamHeaderSticky,
   description,
   locale,
-  tiles,
-  benefitsLabel,
+  tiles
 }: TeamSectionMobileProps) => (
   <div className='flex flex-col md:hidden'>
     <div
@@ -38,7 +36,7 @@ export const TeamSectionMobile = ({
 
     <div className='mt-5 border-t border-white/25 pt-5'>
       <p className='text-center font-heading text-[36px] leading-none font-medium tracking-tight text-[var(--color-yellow)] uppercase'>
-        {benefitsLabel}
+        MULTI-TASKS
       </p>
     </div>
   </div>
