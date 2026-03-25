@@ -3,6 +3,7 @@ import { useBenefitsQuery } from '@entities/benefit'
 import { useDictionary } from '@shared/lib/dictionary'
 import { useViewport } from '@shared/lib/device'
 import { getTextHighlightParts } from '@shared/lib/highlightText'
+import { AnimatedBackground } from '@shared/ui/AnimatedBackground'
 import { SectionErrorState, SectionLoadingState } from '@shared/ui/SectionRequestState'
 import { Container } from '@shared/ui/Container'
 import { MultiplyDesktopLayout } from './components/MultiplyDesktopLayout'
@@ -27,8 +28,18 @@ export const MultiplySection = () => {
   return (
     <Container
       fullWidth
-      className='relative h-full w-full self-start pt-3 pb-8 md:self-stretch md:py-0'
+      className='relative h-full w-full self-start overflow-hidden bg-mobile pt-3 pb-8 md:self-stretch md:bg-transparent md:py-0'
     >
+      <div
+        className='pointer-events-none absolute inset-y-0 hidden md:block'
+        style={{
+          left: 'calc(var(--container-padding-x) * -1)',
+          right: 'calc(var(--container-padding-x) * -1)',
+        }}
+      >
+        <AnimatedBackground variant='default' />
+      </div>
+
       {isError ? (
         <SectionErrorState
           title={translate('section.error.title')}

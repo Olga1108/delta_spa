@@ -1,4 +1,5 @@
 import type { MultiplySectionContent } from '@entities/multiply'
+import { getAudienceTabId, handleAudienceTabKeyDown } from '../lib/audienceTabs'
 import { LineArrow } from './LineArrow'
 
 type AudienceButtonsDesktopProps = {
@@ -10,6 +11,7 @@ type AudienceButtonsDesktopProps = {
   setHoveredAudience: (index: number | null) => void
   leftBlockScale: number
   scaleLeftPx: (value: number) => string
+  panelId: string
 }
 
 export const AudienceButtonsDesktop = ({
@@ -21,33 +23,53 @@ export const AudienceButtonsDesktop = ({
   setHoveredAudience,
   leftBlockScale,
   scaleLeftPx,
+  panelId,
 }: AudienceButtonsDesktopProps) => {
   return (
     <div
       data-anim='text'
       className='flex flex-col'
+      role='tablist'
+      aria-label='Audience categories'
+      aria-orientation='vertical'
       style={{
         rowGap: scaleLeftPx(20),
       }}
     >
       {items.map((item, index) => {
         const isHighlighted = index === activeAudience || index === hoveredAudience
+        const isSelected = index === activeAudience
         const arrowWidth = Math.max(38, 50 * leftBlockScale)
         const compressedRatio = Math.max(0, 0.9 - leftBlockScale)
         const arrowRightInset = Math.max(10, 57 * leftBlockScale - compressedRatio * 120)
         const textGap = Math.max(18, 20 * leftBlockScale - compressedRatio * 10)
         const textRightReserve = arrowRightInset + arrowWidth + textGap
+        const tabId = getAudienceTabId(item.key)
 
         return (
           <button
-            key={item.key}
+            key={tabId}
+            id={tabId}
             type='button'
+            role='tab'
+            aria-selected={isSelected}
+            aria-controls={panelId}
+            tabIndex={isSelected ? 0 : -1}
             onMouseEnter={() => setHoveredAudience(index)}
             onMouseLeave={() => setHoveredAudience(null)}
             onFocus={() => setHoveredAudience(index)}
             onBlur={() => setHoveredAudience(null)}
             onClick={() => setActiveAudience(index)}
-            className='relative flex cursor-pointer items-center rounded-full font-heading transition-colors duration-200 ease-out'
+            onKeyDown={(event) =>
+              handleAudienceTabKeyDown({
+                event,
+                index,
+                items,
+                setActiveAudience,
+                setHoveredAudience,
+              })
+            }
+            className='relative flex cursor-pointer items-center rounded-full font-heading transition-colors duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-purple-main)]'
             style={{
               width: `${((item.buttonWidth / 511) * 100).toFixed(3)}%`,
               height: scaleLeftPx(80),
