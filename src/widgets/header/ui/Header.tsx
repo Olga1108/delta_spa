@@ -10,7 +10,7 @@ const shouldUseNativeLinkNavigation = (event: MouseEvent<HTMLAnchorElement>) =>
   event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0
 
 const headerNavTypeClass =
-  'font-heading text-[20px] font-bold leading-none tracking-normal align-middle uppercase text-[var(--color-yellow)]'
+  'font-heading text-[20px] font-[500] leading-none tracking-normal align-middle uppercase text-[var(--color-yellow)]'
 
 const headerNavLinkClass = `${headerNavTypeClass} underline decoration-solid decoration-[var(--color-yellow)] underline-offset-4 [text-decoration-thickness:0%] transition-colors hover:text-white hover:decoration-white`
 
@@ -36,15 +36,15 @@ export const Header = () => {
   }
 
   return (
-    <header className="flex shrink-0 items-center justify-between pt-6 md:pt-8">
+    <header className='flex shrink-0 items-center justify-between pt-6 md:pt-8'>
       <a
         href={basePath}
         onClick={onLogoClick}
-        className="focus-visible:outline focus-visible:ring-2 focus-visible:ring-white"
+        className='focus-visible:outline focus-visible:ring-2 focus-visible:ring-white'
       >
-        <img src={logoImg} alt="CPA" className="h-8 w-auto md:h-9" />
+        <img src={logoImg} alt='CPA' className='h-8 w-auto md:h-9' />
       </a>
-      <nav className="flex items-center gap-6 md:gap-8" aria-label="Main">
+      <nav className='flex items-center gap-6 md:gap-8' aria-label='Main'>
         <a
           href={`${basePath}#team`}
           onClick={(e) => onSectionNavClick(e, 'team')}
@@ -66,7 +66,7 @@ export const Header = () => {
         >
           {translate('header.nav.join')}
         </a>
-        <LocaleSwitcher variant="header" />
+        <LocaleSwitcher variant='header' />
       </nav>
     </header>
   )

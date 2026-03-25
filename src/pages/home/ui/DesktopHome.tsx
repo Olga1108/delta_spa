@@ -29,8 +29,8 @@ export const DesktopHome = () => {
 
   return (
     <FullPageNavigationProvider value={{ goToSectionId }}>
-      <main ref={viewportRef} className="relative h-dvh overflow-hidden bg-black text-white">
-        <div ref={trackRef} className="will-change-transform">
+      <main ref={viewportRef} className='relative h-dvh overflow-hidden bg-black text-white'>
+        <div ref={trackRef} className='will-change-transform'>
           {homeSections.map((section, index) => (
             <section
               key={section.id}

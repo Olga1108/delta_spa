@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useBenefitsQuery } from '@entities/benefit'
 import { useDictionary } from '@shared/lib/dictionary'
+import { getTextHighlightParts } from '@shared/lib/highlightText'
 import { SectionErrorState, SectionLoadingState } from '@shared/ui/SectionRequestState'
 import { Container } from '@shared/ui/Container'
 import { MultiplyDesktopLayout } from './components/MultiplyDesktopLayout'
@@ -13,34 +14,13 @@ const highlightedWordByLocale = {
   ua: 'гарантувати',
 } as const
 
-const getTitleParts = (title: string, locale: keyof typeof highlightedWordByLocale) => {
-  const highlight = highlightedWordByLocale[locale]
-  const normalizedTitle = title.toLowerCase()
-  const normalizedHighlight = highlight.toLowerCase()
-  const highlightIndex = normalizedTitle.indexOf(normalizedHighlight)
-
-  if (highlightIndex < 0) {
-    return {
-      before: title,
-      highlight: '',
-      after: '',
-    }
-  }
-
-  return {
-    before: title.slice(0, highlightIndex),
-    highlight: title.slice(highlightIndex, highlightIndex + highlight.length),
-    after: title.slice(highlightIndex + highlight.length),
-  }
-}
-
 export const MultiplySection = () => {
   const { locale, translate } = useDictionary()
   const { data, isLoading, isError, refetch } = useBenefitsQuery(locale)
   const [desktopScale, setDesktopScale] = useState(1)
   const scalePx = (value: number) => `${Math.round(value * desktopScale)}px`
   const scaleFloatPx = (value: number) => `${(value * desktopScale).toFixed(3)}px`
-  const titleParts = data ? getTitleParts(data.title, locale) : null
+  const titleParts = data ? getTextHighlightParts(data.title, highlightedWordByLocale[locale]) : null
 
   useEffect(() => {
     const updateScale = () => {
@@ -58,7 +38,7 @@ export const MultiplySection = () => {
   return (
     <Container
       fullWidth
-      className="relative h-full w-full self-start pt-3 pb-8 md:self-stretch md:py-0"
+      className='relative h-full w-full self-start pt-3 pb-8 md:self-stretch md:py-0'
     >
       {isError ? (
         <SectionErrorState

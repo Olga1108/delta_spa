@@ -24,8 +24,8 @@ export const AudienceButtonsDesktop = ({
 }: AudienceButtonsDesktopProps) => {
   return (
     <div
-      data-anim="text"
-      className="flex flex-col"
+      data-anim='text'
+      className='flex flex-col'
       style={{
         rowGap: scaleLeftPx(20),
       }}
@@ -41,13 +41,13 @@ export const AudienceButtonsDesktop = ({
         return (
           <button
             key={item.key}
-            type="button"
+            type='button'
             onMouseEnter={() => setHoveredAudience(index)}
             onMouseLeave={() => setHoveredAudience(null)}
             onFocus={() => setHoveredAudience(index)}
             onBlur={() => setHoveredAudience(null)}
             onClick={() => setActiveAudience(index)}
-            className="relative flex cursor-pointer items-center rounded-full font-heading transition-colors duration-200 ease-out"
+            className='relative flex cursor-pointer items-center rounded-full font-heading transition-colors duration-200 ease-out'
             style={{
               width: `${((item.buttonWidth / 511) * 100).toFixed(3)}%`,
               height: scaleLeftPx(80),
@@ -60,7 +60,7 @@ export const AudienceButtonsDesktop = ({
             }}
           >
             <span
-              className="block overflow-hidden text-ellipsis whitespace-nowrap font-[500]"
+              className='block overflow-hidden text-ellipsis whitespace-nowrap font-[500]'
               style={{
                 fontSize: scaleLeftPx(28),
                 lineHeight: scaleLeftPx(30),
@@ -70,7 +70,7 @@ export const AudienceButtonsDesktop = ({
               {getAudienceLabel(item.key)}
             </span>
             <span
-              className="absolute top-1/2 -translate-y-1/2"
+              className='absolute top-1/2 -translate-y-1/2'
               style={{ right: `${arrowRightInset.toFixed(3)}px` }}
             >
               <LineArrow

@@ -47,7 +47,7 @@ export const JoinSection = () => {
   return (
     <Container
       fullWidth
-      className="relative h-full w-full self-start pt-3 pb-8 md:self-stretch md:py-0"
+      className='relative h-full w-full self-start pt-3 pb-8 md:self-stretch md:py-0'
     >
       {isError ? (
         <SectionErrorState

@@ -5,7 +5,7 @@ import { MobileHomeMenuContext } from './mobileHomeMenuContext'
 export const useMobileHomeMenu = () => useContext(MobileHomeMenuContext)
 
 /**
- * Shared open/close for mobile menu. Uses provider state on mobile home; 
+ * Shared open/close for mobile menu. Uses provider state on mobile home;
  */
 export const useMobileMenuOpenState = () => {
   const ctx = useMobileHomeMenu()

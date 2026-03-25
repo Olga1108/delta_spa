@@ -14,6 +14,19 @@
   --animated-bg-hole-r: calc(33dvh + 100px);
   --animated-bg-hole-x: -10%;
   --animated-bg-hole-y: 50%;
+  --animated-bg-fill: var(--gradient-animated-default);
+}
+
+.animated-bg--default {
+  --animated-bg-fill: var(--gradient-animated-default);
+}
+
+.animated-bg--mobile {
+  --animated-bg-fill: var(--gradient-hero-mobile);
+}
+
+.animated-bg--team {
+  --animated-bg-fill: var(--gradient-team-desktop);
 }
 
 .animated-bg__layer {
@@ -22,7 +35,7 @@
 }
 
 .animated-bg__base {
-  background: linear-gradient(111.06deg, #dc8400 -3.49%, #560080 49.69%, #220032 91.86%);
+  background: var(--animated-bg-fill);
 }
 
 .animated-bg__grid {
@@ -33,7 +46,7 @@
 }
 
 .animated-bg__overlay {
-  background: linear-gradient(111.06deg, #dc8400 -3.49%, #560080 49.69%, #220032 91.86%);
+  background: var(--animated-bg-fill);
   -webkit-mask-image: radial-gradient(
     circle var(--animated-bg-hole-r) at var(--animated-bg-hole-x) var(--animated-bg-hole-y),
     transparent 0%,

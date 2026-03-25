@@ -1,1 +1,1 @@
-export { AnimatedBackground } from './AnimatedBackground'
+export { AnimatedBackground, type AnimatedBackgroundVariant } from './AnimatedBackground'

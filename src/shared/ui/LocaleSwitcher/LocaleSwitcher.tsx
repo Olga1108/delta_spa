@@ -1,12 +1,12 @@
 import { useDictionary } from '@shared/lib/dictionary'
 
 const headerNavTypeClass =
-  'font-heading text-[20px] font-bold leading-none tracking-normal align-middle uppercase text-[var(--color-yellow)]'
+  'font-heading text-[20px] font-[500] leading-none tracking-normal align-middle uppercase text-[var(--color-yellow)]'
 
 const headerNavLinkClass = `${headerNavTypeClass} underline decoration-solid decoration-[var(--color-yellow)] underline-offset-4 [text-decoration-thickness:0%] transition-colors hover:text-white hover:decoration-white`
 
 const headerNavLocaleActiveClass =
-  'font-heading text-[20px] font-bold leading-none tracking-normal align-middle uppercase text-white no-underline transition-colors'
+  'font-heading text-[20px] font-[500] leading-none tracking-normal align-middle uppercase text-white no-underline transition-colors'
 
 type LocaleSwitcherProps = {
   variant: 'header' | 'mobileMenu'
@@ -17,9 +17,9 @@ export const LocaleSwitcher = ({ variant }: LocaleSwitcherProps) => {
 
   if (variant === 'header') {
     return (
-      <span className="inline-flex items-center gap-1 text-[var(--color-yellow)]">
+      <span className='inline-flex items-center gap-1 text-[var(--color-yellow)]'>
         <a
-          href="/"
+          href='/'
           className={locale === 'en' ? headerNavLocaleActiveClass : headerNavLinkClass}
           aria-current={locale === 'en' ? 'page' : undefined}
         >
@@ -27,7 +27,7 @@ export const LocaleSwitcher = ({ variant }: LocaleSwitcherProps) => {
         </a>
         <span aria-hidden>/</span>
         <a
-          href="/ua"
+          href='/ua'
           className={locale === 'ua' ? headerNavLocaleActiveClass : headerNavLinkClass}
           aria-current={locale === 'ua' ? 'page' : undefined}
         >
@@ -38,9 +38,9 @@ export const LocaleSwitcher = ({ variant }: LocaleSwitcherProps) => {
   }
 
   return (
-    <div className="flex justify-center pb-6 font-heading text-[32px] leading-none font-[500] tracking-tight uppercase">
+    <div className='flex justify-center pb-6 font-heading text-[32px] leading-none font-[500] tracking-tight uppercase'>
       <a
-        href="/"
+        href='/'
         className={
           locale === 'en'
             ? 'text-white no-underline'
@@ -49,9 +49,9 @@ export const LocaleSwitcher = ({ variant }: LocaleSwitcherProps) => {
       >
         {translate('header.locale.en')}
       </a>
-      <span className="px-1 text-[var(--color-yellow)]">/</span>
+      <span className='px-1 text-[var(--color-yellow)]'>/</span>
       <a
-        href="/ua"
+        href='/ua'
         className={
           locale === 'ua'
             ? 'text-[var(--color-yellow)] underline decoration-[var(--color-yellow)]'
