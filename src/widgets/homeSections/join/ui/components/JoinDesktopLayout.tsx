@@ -1,6 +1,7 @@
 import type { MultiplySectionContent } from '@entities/multiply'
 import snakeBottomImage from '@shared/assets/Images/hero/hero-decor-aqsu@1x.png'
 import { SectionMetaHeading } from '@widgets/homeSections/shared/ui/SectionMetaHeading'
+import { getAudienceTabId } from '../lib/audienceTabs'
 import { AudienceButtonsDesktop } from './AudienceButtonsDesktop'
 import { JoinFooterDesktop } from './JoinFooterDesktop'
 import { JoinInfoPanelDesktop } from './JoinInfoPanelDesktop'
@@ -41,6 +42,8 @@ export const JoinDesktopLayout = ({
   getCtaLabel,
 }: JoinDesktopLayoutProps) => {
   const currentItem = items[activeAudience] ?? items[0]
+  const currentTabId = currentItem ? getAudienceTabId(currentItem.key) : undefined
+  const panelId = 'join-audience-panel'
 
   return (
     <div className='relative hidden h-full w-full md:block'>
@@ -76,8 +79,11 @@ export const JoinDesktopLayout = ({
           setHoveredAudience={setHoveredAudience}
           leftBlockScale={leftBlockScale}
           scaleLeftPx={scaleLeftPx}
+          panelId={panelId}
         />
         <JoinInfoPanelDesktop
+          panelId={panelId}
+          labelledBy={currentTabId}
           desktopScale={desktopScale}
           scalePx={scalePx}
           rightTextSize={rightTextSize}
