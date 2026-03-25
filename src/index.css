@@ -37,6 +37,9 @@
     #14091a 49.69%,
     #220032 91.86%
   );
+
+  /** AnimatedBackground: hero / multiply / join (desktop default). */
+  --gradient-animated-default: linear-gradient(111.06deg, #dc8400 -3.49%, #560080 49.69%, #220032 91.86%);
 }
 
 @layer utilities {

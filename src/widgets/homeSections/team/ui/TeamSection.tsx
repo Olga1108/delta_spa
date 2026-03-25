@@ -1,11 +1,12 @@
-import { useLayoutEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useTasksQuery } from '@entities/task'
 import { useDictionary } from '@shared/lib/dictionary'
 import { Container } from '@shared/ui/Container'
 import { SectionErrorState, SectionLoadingState } from '@shared/ui/SectionRequestState'
-import { HeroMobileMenuBar } from '@widgets/homeSections/hero'
-import { TeamTile } from './components/TeamTile'
-import { SnakeIntroCard } from './components/SnakeIntroCard'
+import { getTeamDesktopLayoutMetrics, isTeamTabletWidth } from '../lib/teamDesktopLayoutMetrics'
+import { TeamSectionDesktopTablet } from './TeamSectionDesktopTablet'
+import { TeamSectionDesktopWide } from './TeamSectionDesktopWide'
+import { TeamSectionMobile } from './TeamSectionMobile'
 
 export const TeamSection = () => {
   const { locale, translate } = useDictionary()
@@ -13,6 +14,10 @@ export const TeamSection = () => {
   const tiles = data ? data.tiles.slice(0, 5) : []
   const teamMobileBlockRef = useRef<HTMLDivElement>(null)
   const [isTeamHeaderSticky, setIsTeamHeaderSticky] = useState(true)
+  const [viewportWidth, setViewportWidth] = useState(1280)
+  const [layout, setLayout] = useState(() =>
+    getTeamDesktopLayoutMetrics(typeof window !== 'undefined' ? window.innerWidth : 1280, 800),
+  )
 
   useLayoutEffect(() => {
     const el = teamMobileBlockRef.current
@@ -34,10 +39,27 @@ export const TeamSection = () => {
     }
   }, [data])
 
+  useEffect(() => {
+    const onResize = () => {
+      const w = window.innerWidth
+      const h = window.innerHeight
+      setViewportWidth(w)
+      setLayout(getTeamDesktopLayoutMetrics(w, h))
+    }
+
+    onResize()
+    window.addEventListener('resize', onResize)
+    return () => {
+      window.removeEventListener('resize', onResize)
+    }
+  }, [])
+
+  const isTabletLayout = isTeamTabletWidth(viewportWidth)
+
   return (
     <Container
       fullWidth
-      className="relative flex h-full min-h-0 w-full flex-col self-stretch pt-0 pb-0 md:h-full md:self-stretch md:py-0"
+      className='relative flex h-full min-h-0 w-full flex-col self-stretch pt-0 pb-0 md:h-full md:self-stretch md:py-0'
     >
       {isError ? (
         <SectionErrorState
@@ -51,72 +73,38 @@ export const TeamSection = () => {
       ) : (
         <div
           ref={teamMobileBlockRef}
-          className="relative -mx-[var(--container-padding-x)] flex min-h-dvh flex-col bg-[var(--color-purple-dark)] px-[var(--container-padding-x)] pt-0 pb-7 md:min-h-0 md:h-full md:self-stretch md:bg-team-desktop md:py-10"
+          className={`relative -mx-[var(--container-padding-x)] flex min-h-dvh flex-col bg-[var(--color-purple-dark)] px-[var(--container-padding-x)] pt-0 pb-7 md:self-stretch md:bg-team-desktop md:px-[var(--container-padding-x)] ${
+            isTabletLayout
+              ? 'md:min-h-0 md:h-full md:overflow-hidden md:pt-4 md:pb-8'
+              : 'md:min-h-0 md:h-full md:py-10'
+          }`}
         >
-          <div className="flex flex-col md:hidden">
-            <div
-              className={`z-30 -mx-[var(--container-padding-x)] px-[var(--container-padding-x)] py-3 bg-[var(--color-purple-dark)] ${
-                isTeamHeaderSticky ? 'sticky top-0' : 'relative'
-              }`}
-            >
-              <HeroMobileMenuBar barClassName="!pt-0 !pb-0" />
-            </div>
+          <TeamSectionMobile
+            isTeamHeaderSticky={isTeamHeaderSticky}
+            description={data.description}
+            locale={locale}
+            tiles={tiles}
+            benefitsLabel={translate('benefits.multiTasks')}
+          />
 
-            <SnakeIntroCard description={data.description} locale={locale} variant="mobile" />
-
-            <div className="mt-4 space-y-4">
-              {tiles.map((item, index) => (
-                <TeamTile
-                  key={`${item.title}-${index}`}
-                  title={item.title}
-                  text={item.text}
-                  variant="mobile"
-                />
-              ))}
-            </div>
-
-            <div className="mt-5 border-t border-white/25 pt-5">
-              <p className="text-center font-heading text-[36px] leading-none font-medium tracking-tight text-[var(--color-yellow)] uppercase">
-                {translate('benefits.multiTasks')}
-              </p>
-            </div>
-          </div>
-
-          <div className="hidden md:block">
-            <p
-              data-anim="meta"
-              className="mb-4 text-right font-heading text-2xl leading-none font-medium tracking-tight text-[var(--color-yellow)] uppercase"
-            >
-              {translate('benefits.multiTasks')}
-            </p>
-
-            <div className="grid h-[calc(100%-2.5rem)] min-h-[34rem] grid-cols-[1.12fr_1.12fr_0.82fr] [grid-template-rows:repeat(6,minmax(0,1fr))] gap-3">
-              <SnakeIntroCard description={data.description} locale={locale} variant="desktop" />
-
-              <div className="row-span-6 grid h-full grid-rows-2 gap-3">
-                {tiles.slice(0, 2).map((item, index) => (
-                  <TeamTile
-                    key={`${item.title}-${index}`}
-                    title={item.title}
-                    text={item.text}
-                    variant="desktop"
-                    dataAnim="text"
-                  />
-                ))}
-              </div>
-
-              <div className="row-span-6 grid h-full grid-rows-3 gap-3">
-                {tiles.slice(2, 5).map((item, index) => (
-                  <TeamTile
-                    key={`${item.title}-${index}`}
-                    title={item.title}
-                    text={item.text}
-                    variant="desktop"
-                    dataAnim="text"
-                  />
-                ))}
-              </div>
-            </div>
+          <div className='relative hidden h-full md:block'>
+            {isTabletLayout ? (
+              <TeamSectionDesktopTablet
+                sideOffsetPx={layout.sideOffsetPx}
+                description={data.description}
+                locale={locale}
+                tiles={tiles}
+              />
+            ) : (
+              <TeamSectionDesktopWide
+                sideOffsetPx={layout.sideOffsetPx}
+                bottomOffsetPx={layout.bottomOffsetPx}
+                headingToGridGapPx={layout.headingToGridGapPx}
+                description={data.description}
+                locale={locale}
+                tiles={tiles}
+              />
+            )}
           </div>
         </div>
       )}

@@ -12,19 +12,19 @@ export const MultiplyMarqueeContent = ({ mobile = false }: MultiplyMarqueeConten
       <span>Dream big earn bigger!</span>
       <img
         src={snakeIconYellow}
-        alt=""
+        alt=''
         className={`shrink-0 ${mobile ? 'h-[27px] w-[30px]' : 'h-7 w-7 md:h-10 md:w-10'}`}
       />
       <span>Dream big earn bigger!</span>
       <img
         src={snakeIconYellow}
-        alt=""
+        alt=''
         className={`shrink-0 ${mobile ? 'h-[27px] w-[30px]' : 'h-7 w-7 md:h-10 md:w-10'}`}
       />
       <span>Dream big earn bigger!</span>
       <img
         src={snakeIconYellow}
-        alt=""
+        alt=''
         className={`shrink-0 ${mobile ? 'h-[27px] w-[30px]' : 'h-7 w-7 md:h-10 md:w-10'}`}
       />
     </div>

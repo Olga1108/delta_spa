@@ -45,7 +45,7 @@ function SomePage() {
 3. Override padding or add classes via `className`:
 
 ```tsx
-<Container className="py-8">...</Container>
+<Container className='py-8'>...</Container>
 ```
 
 ## Examples
