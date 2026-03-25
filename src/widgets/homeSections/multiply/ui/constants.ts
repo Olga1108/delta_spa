@@ -18,13 +18,9 @@ export const desktopLayout = {
   snake: { size: 324, top: 32, left: -320 },
 }
 
-export const getDesktopStageScale = () => {
-  if (typeof window === 'undefined') {
-    return 1
-  }
-
-  const widthScale = (window.innerWidth - 60) / 1220
-  const heightScale = (window.innerHeight - 120) / 560
+export const getDesktopStageScale = (viewportWidth: number, viewportHeight: number) => {
+  const widthScale = (viewportWidth - 60) / 1220
+  const heightScale = (viewportHeight - 120) / 560
   const targetScale = Math.min(widthScale, heightScale)
 
   return Math.min(1.32, Math.max(1, targetScale))

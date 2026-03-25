@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { ContactFormModal } from '@features/contactForm'
+import { useDevice } from '@shared/lib/device'
 import { Container } from '@shared/ui/Container'
 import { useDictionary } from '@shared/lib/dictionary'
 import { ParallelogramButton } from '@shared/ui/ParallelogramButton'
@@ -11,21 +12,24 @@ import { HeroSocialLinks } from './components/HeroSocialLinks'
 
 export const HeroSection = () => {
   const { translate } = useDictionary()
+  const { isMdUp } = useDevice()
   const [isContactModalOpen, setIsContactModalOpen] = useState(false)
 
   return (
     <div className='relative flex w-full min-h-screen min-h-dvh flex-col overflow-hidden bg-mobile md:h-full md:min-h-0 md:self-stretch md:bg-transparent'>
-      <div className='pointer-events-none absolute inset-0 hidden md:block'>
-        <AnimatedBackground variant='default' />
-      </div>
+      {isMdUp ? (
+        <div className='pointer-events-none absolute inset-0 hidden md:block'>
+          <AnimatedBackground variant='default' />
+        </div>
+      ) : null}
       <Container fullWidth className='relative z-10 flex min-h-0 flex-1 flex-col md:mb-8'>
-        <div data-anim='meta' className='hidden md:block'>
-          <Header />
-        </div>
-
-        <div className='md:hidden'>
+        {isMdUp ? (
+          <div data-anim='meta' className='hidden md:block'>
+            <Header />
+          </div>
+        ) : (
           <HeroMobileMenuBar />
-        </div>
+        )}
 
         <div className='relative flex min-h-0 flex-1 flex-col gap-0 pt-0 pb-4 md:flex-row md:items-stretch md:gap-12 md:py-8 lg:gap-16'>
           <div className='z-10 flex flex-col justify-start md:max-w-[66%] md:flex-1 md:justify-center'>
@@ -62,7 +66,7 @@ export const HeroSection = () => {
           </div>
         </div>
 
-        <HeroSocialLinks className='hidden shrink-0 items-center gap-6 pb-0 md:flex' />
+        {isMdUp ? <HeroSocialLinks className='hidden shrink-0 items-center gap-6 pb-0 md:flex' /> : null}
       </Container>
       <ContactFormModal isOpen={isContactModalOpen} onClose={() => setIsContactModalOpen(false)} />
     </div>

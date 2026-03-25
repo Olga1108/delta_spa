@@ -1,8 +1,8 @@
 const teamCardTitleClassName =
-  'font-heading text-[28px] leading-[28px] font-bold tracking-normal text-[var(--color-yellow)] uppercase'
+  'font-heading text-[24px] leading-[24px] font-[500] tracking-normal text-[var(--color-yellow)] uppercase 2xl:text-[28px] 2xl:leading-[28px]'
 
 const teamCardTextClassName =
-  'mt-2 max-w-[27ch] font-body text-[20px] leading-[24px] font-normal tracking-normal text-white md:max-w-[20ch] md:text-[18px] md:leading-[22px] xl:max-w-[27ch] xl:text-[20px] xl:leading-[24px]'
+  'mt-2 max-w-[27ch] font-body text-[20px] leading-[24px] font-normal tracking-normal text-white md:max-w-[20ch] md:text-[18px] md:leading-[22px] lg:max-w-[19ch] lg:text-[16px] lg:leading-[20px] xl:max-w-[24ch] xl:text-[18px] xl:leading-[22px] 2xl:max-w-[27ch] 2xl:text-[20px] 2xl:leading-[24px]'
 
 type TeamTileProps = {
   title: string
@@ -35,7 +35,7 @@ export const TeamTile = ({
   return (
     <article
       data-anim={dataAnim}
-      className={`h-full rounded-[10px] bg-[var(--color-purple-main)] p-5 ${className ?? ''}`.trim()}
+      className={`h-full overflow-hidden rounded-[10px] bg-[var(--color-purple-main)] p-5 ${className ?? ''}`.trim()}
     >
       <h3 className={titleClassName ?? teamCardTitleClassName}>{title}</h3>
       <p className={textClassName ?? teamCardTextClassName}>{text}</p>

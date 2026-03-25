@@ -45,10 +45,10 @@ export const TeamSectionDesktopWide = ({
         bottom: `${bottomOffsetPx}px`,
       }}
     >
-      <div className='grid h-full grid-cols-[1.12fr_1.12fr_1.12fr] [grid-template-rows:repeat(6,minmax(0,1fr))] gap-2 xl:gap-3'>
+      <div className='grid h-full grid-cols-[1.12fr_1.12fr_1.12fr] [grid-template-rows:repeat(6,minmax(0,1fr))] gap-2'>
         <SnakeIntroCard description={description} locale={locale} variant='desktop' />
 
-        <div className='row-span-6 grid h-full grid-rows-2 gap-3'>
+        <div className='row-span-6 grid h-full grid-rows-2 gap-2'>
           {tiles.slice(0, 2).map((item, index) => (
             <TeamTile
               key={`${item.title}-${index}`}
@@ -60,7 +60,7 @@ export const TeamSectionDesktopWide = ({
           ))}
         </div>
 
-        <div className='row-span-6 grid h-full grid-rows-3 gap-3'>
+        <div className='row-span-6 grid h-full grid-rows-3 gap-2'>
           {tiles.slice(2, 5).map((item, index) => (
             <TeamTile
               key={`${item.title}-${index}`}

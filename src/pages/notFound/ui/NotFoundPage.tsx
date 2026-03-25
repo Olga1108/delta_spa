@@ -1,9 +1,9 @@
-import { useMediaQuery } from '@shared/lib/media'
+import { useDevice } from '@shared/lib/device'
 import { DesktopNotFoundPage } from './DesktopNotFoundPage'
 import { MobileNotFoundPage } from './MobileNotFoundPage'
 
 export const NotFoundPage = () => {
-  const isMobile = useMediaQuery('(max-width: 767px)')
+  const { isMobile } = useDevice()
 
   if (isMobile) {
     return <MobileNotFoundPage />

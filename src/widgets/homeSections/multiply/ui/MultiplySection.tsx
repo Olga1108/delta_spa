@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useMemo } from 'react'
 import { useBenefitsQuery } from '@entities/benefit'
 import { useDictionary } from '@shared/lib/dictionary'
+import { useViewport } from '@shared/lib/device'
 import { getTextHighlightParts } from '@shared/lib/highlightText'
 import { SectionErrorState, SectionLoadingState } from '@shared/ui/SectionRequestState'
 import { Container } from '@shared/ui/Container'
@@ -17,23 +18,11 @@ const highlightedWordByLocale = {
 export const MultiplySection = () => {
   const { locale, translate } = useDictionary()
   const { data, isLoading, isError, refetch } = useBenefitsQuery(locale)
-  const [desktopScale, setDesktopScale] = useState(1)
+  const { width, height } = useViewport()
+  const desktopScale = useMemo(() => getDesktopStageScale(width, height), [width, height])
   const scalePx = (value: number) => `${Math.round(value * desktopScale)}px`
   const scaleFloatPx = (value: number) => `${(value * desktopScale).toFixed(3)}px`
   const titleParts = data ? getTextHighlightParts(data.title, highlightedWordByLocale[locale]) : null
-
-  useEffect(() => {
-    const updateScale = () => {
-      setDesktopScale(getDesktopStageScale())
-    }
-
-    updateScale()
-    window.addEventListener('resize', updateScale)
-
-    return () => {
-      window.removeEventListener('resize', updateScale)
-    }
-  }, [])
 
   return (
     <Container
