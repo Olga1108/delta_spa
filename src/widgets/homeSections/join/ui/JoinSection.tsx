@@ -1,7 +1,8 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import type { MultiplySectionContent } from '@entities/multiply'
 import { mapMultiplyData, useMultiplyQuery } from '@entities/multiply'
 import { useDictionary } from '@shared/lib/dictionary'
+import { useViewport } from '@shared/lib/device'
 import { SectionErrorState, SectionLoadingState } from '@shared/ui/SectionRequestState'
 import { Container } from '@shared/ui/Container'
 import { JoinDesktopLayout } from './components/JoinDesktopLayout'
@@ -11,10 +12,11 @@ import { getDesktopContentTop, getDesktopStageScale } from './constants'
 export const JoinSection = () => {
   const { locale, translate } = useDictionary()
   const { data, isLoading, isError, refetch } = useMultiplyQuery(locale)
-  const [desktopScale, setDesktopScale] = useState(1)
-  const [desktopContentTop, setDesktopContentTop] = useState(87)
+  const { width, height } = useViewport()
   const [activeAudience, setActiveAudience] = useState(0)
   const [hoveredAudience, setHoveredAudience] = useState<number | null>(null)
+  const desktopScale = useMemo(() => getDesktopStageScale(width, height), [width, height])
+  const desktopContentTop = useMemo(() => getDesktopContentTop(height), [height])
   const scalePx = (value: number) => `${Math.round(value * desktopScale)}px`
   const scaleFloatPx = (value: number) => `${(value * desktopScale).toFixed(3)}px`
   const leftBlockScale = Math.min(desktopScale, 1)
@@ -29,20 +31,6 @@ export const JoinSection = () => {
     () => (items.length > 0 ? Math.min(activeAudience, items.length - 1) : 0),
     [activeAudience, items.length],
   )
-
-  useEffect(() => {
-    const updateScale = () => {
-      setDesktopScale(getDesktopStageScale())
-      setDesktopContentTop(getDesktopContentTop())
-    }
-
-    updateScale()
-    window.addEventListener('resize', updateScale)
-
-    return () => {
-      window.removeEventListener('resize', updateScale)
-    }
-  }, [])
 
   return (
     <Container

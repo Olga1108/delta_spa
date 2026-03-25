@@ -1,6 +1,7 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { useTasksQuery } from '@entities/task'
 import { useDictionary } from '@shared/lib/dictionary'
+import { useViewport } from '@shared/lib/device'
 import { Container } from '@shared/ui/Container'
 import { SectionErrorState, SectionLoadingState } from '@shared/ui/SectionRequestState'
 import { getTeamDesktopLayoutMetrics, isTeamTabletWidth } from '../lib/teamDesktopLayoutMetrics'
@@ -13,11 +14,9 @@ export const TeamSection = () => {
   const { data, isLoading, isError, refetch } = useTasksQuery(locale)
   const tiles = data ? data.tiles.slice(0, 5) : []
   const teamMobileBlockRef = useRef<HTMLDivElement>(null)
+  const { width, height } = useViewport()
   const [isTeamHeaderSticky, setIsTeamHeaderSticky] = useState(true)
-  const [viewportWidth, setViewportWidth] = useState(1280)
-  const [layout, setLayout] = useState(() =>
-    getTeamDesktopLayoutMetrics(typeof window !== 'undefined' ? window.innerWidth : 1280, 800),
-  )
+  const layout = useMemo(() => getTeamDesktopLayoutMetrics(width, height), [width, height])
 
   useLayoutEffect(() => {
     const el = teamMobileBlockRef.current
@@ -39,22 +38,7 @@ export const TeamSection = () => {
     }
   }, [data])
 
-  useEffect(() => {
-    const onResize = () => {
-      const w = window.innerWidth
-      const h = window.innerHeight
-      setViewportWidth(w)
-      setLayout(getTeamDesktopLayoutMetrics(w, h))
-    }
-
-    onResize()
-    window.addEventListener('resize', onResize)
-    return () => {
-      window.removeEventListener('resize', onResize)
-    }
-  }, [])
-
-  const isTabletLayout = isTeamTabletWidth(viewportWidth)
+  const isTabletLayout = isTeamTabletWidth(width)
 
   return (
     <Container
@@ -75,8 +59,8 @@ export const TeamSection = () => {
           ref={teamMobileBlockRef}
           className={`relative -mx-[var(--container-padding-x)] flex min-h-dvh flex-col bg-[var(--color-purple-dark)] px-[var(--container-padding-x)] pt-0 pb-7 md:self-stretch md:bg-team-desktop md:px-[var(--container-padding-x)] ${
             isTabletLayout
-              ? 'md:min-h-0 md:h-full md:overflow-hidden md:pt-4 md:pb-8'
-              : 'md:min-h-0 md:h-full md:py-10'
+              ? 'md:min-h-0 md:h-full md:overflow-hidden md:pt-4 md:pb-6 lg:pb-7 xl:pb-8'
+              : 'md:min-h-0 md:h-full md:pt-7 md:pb-6 lg:pt-8 lg:pb-6 xl:pt-10 xl:pb-10'
           }`}
         >
           <TeamSectionMobile

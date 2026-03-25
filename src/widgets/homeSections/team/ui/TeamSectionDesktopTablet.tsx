@@ -17,7 +17,7 @@ export const TeamSectionDesktopTablet = ({
   locale,
   tiles,
 }: TeamSectionDesktopTabletProps) => (
-  <div className='h-full'>
+  <div className='flex h-full min-h-0 flex-col'>
     <SectionMetaHeading
       as='h3'
       className='text-right text-[30px] leading-[27px]'
@@ -26,7 +26,7 @@ export const TeamSectionDesktopTablet = ({
       MULTI-TASKS
     </SectionMetaHeading>
 
-    <div className='mt-6 grid h-[calc(100%-4.2rem)] grid-rows-[minmax(0,1.55fr)_minmax(0,0.8fr)] gap-2 px-[24px] pb-6'>
+    <div className='mt-4 grid flex-1 min-h-0 grid-rows-[minmax(0,1.55fr)_minmax(0,0.8fr)] gap-2 px-6 pb-4 lg:pb-5'>
       <div className='grid grid-cols-2 gap-2'>
         <SnakeIntroCard description={description} locale={locale} variant='tablet' />
         <div className='grid grid-rows-2 gap-2'>
