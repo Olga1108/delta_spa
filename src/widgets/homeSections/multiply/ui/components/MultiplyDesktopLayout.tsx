@@ -1,4 +1,5 @@
 import snakeImage from '@shared/assets/Images/hero/hero-image-05@1x.svg'
+import { AnimatedBackground } from '@shared/ui/AnimatedBackground'
 import { SectionMetaHeading } from '@widgets/homeSections/shared/ui/SectionMetaHeading'
 import { benefitCardDesktopHeights, desktopLayout } from '../constants'
 
@@ -22,8 +23,10 @@ export const MultiplyDesktopLayout = ({
   benefits,
 }: MultiplyDesktopLayoutProps) => {
   return (
-    <div className='relative hidden h-full w-full md:block'>
-      <div className='absolute inset-0 overflow-visible'>
+    <div className='relative hidden h-full w-full overflow-hidden md:block'>
+      <AnimatedBackground className='z-0' />
+
+      <div className='absolute inset-0 z-10 overflow-visible'>
         <SectionMetaHeading
           className='absolute text-center'
           as='h3'

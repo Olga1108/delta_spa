@@ -15,6 +15,8 @@
   --animated-bg-hole-x: -10%;
   --animated-bg-hole-y: 50%;
   --animated-bg-fill: var(--gradient-animated-default);
+  --animated-bg-duration: 30s;
+  --animated-bg-timing: linear;
 }
 
 .animated-bg--default {
@@ -61,26 +63,41 @@
     rgba(0, 0, 0, 0.45) 68%,
     #000 80%
   );
-  animation: animated-bg-hole-path 20s ease-in-out infinite;
+  animation: animated-bg-hole-path var(--animated-bg-duration) var(--animated-bg-timing) infinite;
 }
 
 @keyframes animated-bg-hole-path {
-  0%,
-  18% {
+  0% {
     --animated-bg-hole-x: -10%;
     --animated-bg-hole-y: 50%;
   }
-  34% {
+  14% {
+    --animated-bg-hole-x: 22%;
+    --animated-bg-hole-y: 22%;
+  }
+  28% {
     --animated-bg-hole-x: 102%;
     --animated-bg-hole-y: 8%;
   }
-  50% {
+  42% {
+    --animated-bg-hole-x: 72%;
+    --animated-bg-hole-y: 48%;
+  }
+  56% {
+    --animated-bg-hole-x: 102%;
+    --animated-bg-hole-y: 92%;
+  }
+  70% {
+    --animated-bg-hole-x: 28%;
+    --animated-bg-hole-y: 80%;
+  }
+  84% {
     --animated-bg-hole-x: -10%;
     --animated-bg-hole-y: 50%;
   }
-  76% {
+  92% {
     --animated-bg-hole-x: 102%;
-    --animated-bg-hole-y: 92%;
+    --animated-bg-hole-y: 74%;
   }
   100% {
     --animated-bg-hole-x: -10%;

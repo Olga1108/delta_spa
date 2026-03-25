@@ -8,12 +8,17 @@ type AnimatedBackgroundProps = {
   className?: string
 }
 
+const animatedBackgroundVariantClass: Record<AnimatedBackgroundVariant, string> = {
+  default: 'animated-bg--default',
+  mobile: 'animated-bg--mobile',
+  team: 'animated-bg--team',
+}
+
 export const AnimatedBackground = ({
   variant = 'default',
   className = '',
 }: AnimatedBackgroundProps) => {
-  const variantClass =
-    variant === 'default' ? 'animated-bg--default' : variant === 'mobile' ? 'animated-bg--mobile' : 'animated-bg--team'
+  const variantClass = animatedBackgroundVariantClass[variant]
 
   return (
     <div
