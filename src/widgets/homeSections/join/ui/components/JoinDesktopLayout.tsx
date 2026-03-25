@@ -1,6 +1,7 @@
 import type { MultiplySectionContent } from '@entities/multiply'
 import snakeBottomImage from '@shared/assets/Images/hero/hero-decor-aqsu@1x.png'
 import { SectionMetaHeading } from '@widgets/homeSections/shared/ui/SectionMetaHeading'
+import { getAudienceTabId } from '../lib/audienceTabs'
 import { AudienceButtonsDesktop } from './AudienceButtonsDesktop'
 import { JoinFooterDesktop } from './JoinFooterDesktop'
 import { JoinInfoPanelDesktop } from './JoinInfoPanelDesktop'
@@ -41,6 +42,8 @@ export const JoinDesktopLayout = ({
   getCtaLabel,
 }: JoinDesktopLayoutProps) => {
   const currentItem = items[activeAudience] ?? items[0]
+  const currentTabId = currentItem ? getAudienceTabId(currentItem.key) : undefined
+  const panelId = 'join-audience-panel'
 
   return (
     <div className='relative hidden h-full w-full md:block'>
@@ -58,36 +61,39 @@ export const JoinDesktopLayout = ({
           MULTIPLY WITH US
         </SectionMetaHeading>
 
-        <div
-          className='absolute grid items-start'
-          style={{
-            top: `${desktopContentTop}px`,
-            left: '30px',
-            right: '30px',
-            gridTemplateColumns: 'minmax(0, 2fr) minmax(0, 3fr)',
-            columnGap: scalePx(21),
-          }}
-        >
-          <AudienceButtonsDesktop
-            items={items}
-            getAudienceLabel={getAudienceLabel}
-            activeAudience={activeAudience}
-            hoveredAudience={hoveredAudience}
-            setActiveAudience={setActiveAudience}
-            setHoveredAudience={setHoveredAudience}
-            leftBlockScale={leftBlockScale}
-            scaleLeftPx={scaleLeftPx}
-          />
-          <JoinInfoPanelDesktop
-            desktopScale={desktopScale}
-            scalePx={scalePx}
-            rightTextSize={rightTextSize}
-            rightArrowSize={rightArrowSize}
-            step1={currentItem.step1}
-            step2={currentItem.step2}
-            ctaLabel={getCtaLabel(currentItem.key)}
-          />
-        </div>
+      <div
+        className='absolute grid items-start'
+        style={{
+          top: `${desktopContentTop}px`,
+          left: '30px',
+          right: '30px',
+          gridTemplateColumns: 'minmax(0, 2fr) minmax(0, 3fr)',
+          columnGap: scalePx(21),
+        }}
+      >
+        <AudienceButtonsDesktop
+          items={items}
+          getAudienceLabel={getAudienceLabel}
+          activeAudience={activeAudience}
+          hoveredAudience={hoveredAudience}
+          setActiveAudience={setActiveAudience}
+          setHoveredAudience={setHoveredAudience}
+          leftBlockScale={leftBlockScale}
+          scaleLeftPx={scaleLeftPx}
+          panelId={panelId}
+        />
+        <JoinInfoPanelDesktop
+          panelId={panelId}
+          labelledBy={currentTabId}
+          desktopScale={desktopScale}
+          scalePx={scalePx}
+          rightTextSize={rightTextSize}
+          rightArrowSize={rightArrowSize}
+          step1={currentItem.step1}
+          step2={currentItem.step2}
+          ctaLabel={getCtaLabel(currentItem.key)}
+        />
+      </div>
 
         <img
           src={snakeBottomImage}

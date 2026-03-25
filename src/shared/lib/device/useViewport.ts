@@ -70,7 +70,6 @@ const getSnapshot = () => {
     return DEFAULT_VIEWPORT
   }
 
-  // Keep first client render in sync with actual viewport.
   const windowViewport = getWindowViewport()
   if (
     windowViewport.width !== currentViewport.width ||

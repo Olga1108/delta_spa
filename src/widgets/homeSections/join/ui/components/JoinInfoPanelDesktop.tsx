@@ -1,4 +1,6 @@
 type JoinInfoPanelDesktopProps = {
+  panelId: string
+  labelledBy?: string
   desktopScale: number
   scalePx: (value: number) => string
   rightTextSize: number
@@ -12,6 +14,8 @@ import { ParallelogramButton } from '@shared/ui/ParallelogramButton'
 import { LineArrow } from './LineArrow'
 
 export const JoinInfoPanelDesktop = ({
+  panelId,
+  labelledBy,
   desktopScale,
   scalePx,
   rightTextSize,
@@ -24,6 +28,10 @@ export const JoinInfoPanelDesktop = ({
     <div
       data-anim='title'
       className='rounded-xl'
+      id={panelId}
+      role='tabpanel'
+      aria-labelledby={labelledBy}
+      aria-live='polite'
       style={{
         width: '100%',
         height: scalePx(512),

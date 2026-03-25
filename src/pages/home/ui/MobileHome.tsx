@@ -49,7 +49,11 @@ export const MobileHome = () => {
           <section
             key={section.id}
             id={section.id}
-            className={`relative flex min-h-dvh bg-linear-to-b ${section.color} ${
+            className={`relative flex min-h-dvh ${
+              section.id === 'multiply' || section.id === 'join'
+                ? 'bg-mobile'
+                : `bg-linear-to-b ${section.color}`
+            } ${
               section.id === 'multiply' || section.id === 'join'
                 ? 'items-start pt-0 pb-16'
                 : 'items-stretch py-0'

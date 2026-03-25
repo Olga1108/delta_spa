@@ -3,8 +3,8 @@ import { useBenefitsQuery } from '@entities/benefit'
 import { useDictionary } from '@shared/lib/dictionary'
 import { useViewport } from '@shared/lib/device'
 import { getTextHighlightParts } from '@shared/lib/highlightText'
-import { SectionErrorState, SectionLoadingState } from '@shared/ui/SectionRequestState'
 import { AnimatedBackground } from '@shared/ui/AnimatedBackground'
+import { SectionErrorState, SectionLoadingState } from '@shared/ui/SectionRequestState'
 import { Container } from '@shared/ui/Container'
 import { MultiplyDesktopLayout } from './components/MultiplyDesktopLayout'
 import { MultiplyMarquee } from './components/MultiplyMarquee'
@@ -26,46 +26,50 @@ export const MultiplySection = () => {
   const titleParts = data ? getTextHighlightParts(data.title, highlightedWordByLocale[locale]) : null
 
   return (
-    <div className='relative h-full w-full self-stretch overflow-hidden'>
-      <div className='pointer-events-none absolute inset-0 z-0 hidden md:block'>
+    <Container
+      fullWidth
+      className='relative h-full w-full self-start overflow-hidden bg-mobile pt-3 pb-8 md:self-stretch md:bg-transparent md:py-0'
+    >
+      <div
+        className='pointer-events-none absolute inset-y-0 hidden md:block'
+        style={{
+          left: 'calc(var(--container-padding-x) * -1)',
+          right: 'calc(var(--container-padding-x) * -1)',
+        }}
+      >
         <AnimatedBackground variant='default' />
       </div>
 
-      <Container
-        fullWidth
-        className='relative z-10 h-full w-full self-start pt-3 pb-8 md:self-stretch md:py-0'
-      >
-        {isError ? (
-          <SectionErrorState
-            title={translate('section.error.title')}
-            description={translate('section.error.description')}
-            actionLabel={translate('section.error.retry')}
-            onAction={() => void refetch()}
+      {isError ? (
+        <SectionErrorState
+          title={translate('section.error.title')}
+          description={translate('section.error.description')}
+          actionLabel={translate('section.error.retry')}
+          onAction={() => void refetch()}
+        />
+      ) : isLoading || !data || !titleParts ? (
+        <SectionLoadingState />
+      ) : (
+        <>
+          <MultiplyDesktopLayout
+            scalePx={scalePx}
+            scaleFloatPx={scaleFloatPx}
+            titleBeforeHighlight={titleParts.before}
+            titleHighlight={titleParts.highlight}
+            titleAfterHighlight={titleParts.after}
+            description={data.description}
+            benefits={data.benefits}
           />
-        ) : isLoading || !data || !titleParts ? (
-          <SectionLoadingState />
-        ) : (
-          <>
-            <MultiplyDesktopLayout
-              scalePx={scalePx}
-              scaleFloatPx={scaleFloatPx}
-              titleBeforeHighlight={titleParts.before}
-              titleHighlight={titleParts.highlight}
-              titleAfterHighlight={titleParts.after}
-              description={data.description}
-              benefits={data.benefits}
-            />
-            <MultiplyMobileLayout
-              titleBeforeHighlight={titleParts.before}
-              titleHighlight={titleParts.highlight}
-              titleAfterHighlight={titleParts.after}
-              description={data.description}
-              benefits={data.benefits}
-            />
-            <MultiplyMarquee scalePx={scalePx} scaleFloatPx={scaleFloatPx} />
-          </>
-        )}
-      </Container>
-    </div>
+          <MultiplyMobileLayout
+            titleBeforeHighlight={titleParts.before}
+            titleHighlight={titleParts.highlight}
+            titleAfterHighlight={titleParts.after}
+            description={data.description}
+            benefits={data.benefits}
+          />
+          <MultiplyMarquee scalePx={scalePx} scaleFloatPx={scaleFloatPx} />
+        </>
+      )}
+    </Container>
   )
 }
