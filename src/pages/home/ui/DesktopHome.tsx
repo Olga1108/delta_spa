@@ -36,7 +36,11 @@ export const DesktopHome = () => {
               key={section.id}
               id={section.id}
               data-active={activeIndex === index}
-              className={`relative flex h-dvh items-center bg-linear-to-b ${section.color}`}
+              className={`relative flex h-dvh items-center ${
+                section.id === 'multiply' || section.id === 'join'
+                  ? 'bg-transparent'
+                  : `bg-linear-to-b ${section.color}`
+              }`}
             >
               <section.Component />
             </section>

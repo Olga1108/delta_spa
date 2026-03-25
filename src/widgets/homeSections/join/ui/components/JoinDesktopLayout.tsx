@@ -1,6 +1,5 @@
 import type { MultiplySectionContent } from '@entities/multiply'
 import snakeBottomImage from '@shared/assets/Images/hero/hero-decor-aqsu@1x.png'
-import { AnimatedBackground } from '@shared/ui/AnimatedBackground'
 import { SectionMetaHeading } from '@widgets/homeSections/shared/ui/SectionMetaHeading'
 import { AudienceButtonsDesktop } from './AudienceButtonsDesktop'
 import { JoinFooterDesktop } from './JoinFooterDesktop'
@@ -44,10 +43,8 @@ export const JoinDesktopLayout = ({
   const currentItem = items[activeAudience] ?? items[0]
 
   return (
-    <div className='relative hidden h-full w-full overflow-hidden md:block'>
-      <AnimatedBackground className='z-0' />
-
-      <div className='relative z-10 h-full w-full'>
+    <div className='relative hidden h-full w-full md:block'>
+      <div className='h-full w-full'>
         <SectionMetaHeading
           className='absolute'
           as='h3'

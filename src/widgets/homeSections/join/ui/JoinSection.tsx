@@ -4,6 +4,7 @@ import { mapMultiplyData, useMultiplyQuery } from '@entities/multiply'
 import { useDictionary } from '@shared/lib/dictionary'
 import { useViewport } from '@shared/lib/device'
 import { SectionErrorState, SectionLoadingState } from '@shared/ui/SectionRequestState'
+import { AnimatedBackground } from '@shared/ui/AnimatedBackground'
 import { Container } from '@shared/ui/Container'
 import { JoinDesktopLayout } from './components/JoinDesktopLayout'
 import { JoinMobileLayout } from './components/JoinMobileLayout'
@@ -33,48 +34,54 @@ export const JoinSection = () => {
   )
 
   return (
-    <Container
-      fullWidth
-      className='relative h-full w-full self-start pt-3 pb-8 md:self-stretch md:py-0'
-    >
-      {isError ? (
-        <SectionErrorState
-          title={translate('section.error.title')}
-          description={translate('section.error.description')}
-          actionLabel={translate('section.error.retry')}
-          onAction={() => void refetch()}
-        />
-      ) : isLoading || items.length === 0 ? (
-        <SectionLoadingState />
-      ) : (
-        <>
-          <JoinDesktopLayout
-            items={items}
-            getAudienceLabel={getAudienceLabel}
-            desktopScale={desktopScale}
-            desktopContentTop={desktopContentTop}
-            activeAudience={safeActiveAudience}
-            hoveredAudience={hoveredAudience}
-            setActiveAudience={setActiveAudience}
-            setHoveredAudience={setHoveredAudience}
-            scalePx={scalePx}
-            scaleFloatPx={scaleFloatPx}
-            leftBlockScale={leftBlockScale}
-            scaleLeftPx={scaleLeftPx}
-            rightTextSize={rightTextSize}
-            rightArrowSize={rightArrowSize}
-            getCtaLabel={getCtaLabel}
-          />
+    <div className='relative h-full w-full self-stretch overflow-hidden'>
+      <div className='pointer-events-none absolute inset-0 z-0 hidden md:block'>
+        <AnimatedBackground variant='default' />
+      </div>
 
-          <JoinMobileLayout
-            items={items}
-            activeAudience={safeActiveAudience}
-            setActiveAudience={setActiveAudience}
-            getAudienceLabel={getAudienceLabel}
-            getCtaLabel={getCtaLabel}
+      <Container
+        fullWidth
+        className='relative z-10 h-full w-full self-start pt-3 pb-8 md:self-stretch md:py-0'
+      >
+        {isError ? (
+          <SectionErrorState
+            title={translate('section.error.title')}
+            description={translate('section.error.description')}
+            actionLabel={translate('section.error.retry')}
+            onAction={() => void refetch()}
           />
-        </>
-      )}
-    </Container>
+        ) : isLoading || items.length === 0 ? (
+          <SectionLoadingState />
+        ) : (
+          <>
+            <JoinDesktopLayout
+              items={items}
+              getAudienceLabel={getAudienceLabel}
+              desktopScale={desktopScale}
+              desktopContentTop={desktopContentTop}
+              activeAudience={safeActiveAudience}
+              hoveredAudience={hoveredAudience}
+              setActiveAudience={setActiveAudience}
+              setHoveredAudience={setHoveredAudience}
+              scalePx={scalePx}
+              scaleFloatPx={scaleFloatPx}
+              leftBlockScale={leftBlockScale}
+              scaleLeftPx={scaleLeftPx}
+              rightTextSize={rightTextSize}
+              rightArrowSize={rightArrowSize}
+              getCtaLabel={getCtaLabel}
+            />
+
+            <JoinMobileLayout
+              items={items}
+              activeAudience={safeActiveAudience}
+              setActiveAudience={setActiveAudience}
+              getAudienceLabel={getAudienceLabel}
+              getCtaLabel={getCtaLabel}
+            />
+          </>
+        )}
+      </Container>
+    </div>
   )
 }
