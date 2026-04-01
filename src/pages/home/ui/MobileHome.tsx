@@ -3,6 +3,7 @@ import { useMultiplyQuery } from '@entities/multiply'
 import { useTasksQuery } from '@entities/task'
 import { useDictionary } from '@shared/lib/dictionary'
 import { MobileHomeMenuProvider } from '@shared/lib/MobileHomeMenuProvider'
+import { MobileStaticBackground } from '@shared/ui/MobileStaticBackground'
 import { SectionErrorState, SectionLoadingState } from '@shared/ui/SectionRequestState'
 import { HeroMobileMenuOverlay } from '@widgets/homeSections/hero'
 import { homeSections } from '../config/fullPageMock'
@@ -16,8 +17,11 @@ export const MobileHome = () => {
   if (benefitsQuery.isLoading || multiplyQuery.isLoading || tasksQuery.isLoading) {
     return (
       <main className='bg-black text-white'>
-        <section className='relative flex min-h-dvh items-center justify-center bg-[linear-gradient(122deg,#dc8400_2%,#560080_50%,#220032_92%)]'>
-          <SectionLoadingState />
+        <section className='relative flex min-h-dvh items-center justify-center'>
+          <MobileStaticBackground />
+          <div className='relative z-10'>
+            <SectionLoadingState />
+          </div>
         </section>
       </main>
     )
@@ -26,17 +30,20 @@ export const MobileHome = () => {
   if (benefitsQuery.isError || multiplyQuery.isError || tasksQuery.isError) {
     return (
       <main className='bg-black text-white'>
-        <section className='relative flex min-h-dvh items-center justify-center bg-[linear-gradient(122deg,#dc8400_2%,#560080_50%,#220032_92%)]'>
-          <SectionErrorState
-            title={translate('section.error.title')}
-            description={translate('section.error.description')}
-            actionLabel={translate('section.error.retry')}
-            onAction={() => {
-              void benefitsQuery.refetch()
-              void multiplyQuery.refetch()
-              void tasksQuery.refetch()
-            }}
-          />
+        <section className='relative flex min-h-dvh items-center justify-center'>
+          <MobileStaticBackground />
+          <div className='relative z-10'>
+            <SectionErrorState
+              title={translate('section.error.title')}
+              description={translate('section.error.description')}
+              actionLabel={translate('section.error.retry')}
+              onAction={() => {
+                void benefitsQuery.refetch()
+                void multiplyQuery.refetch()
+                void tasksQuery.refetch()
+              }}
+            />
+          </div>
         </section>
       </main>
     )

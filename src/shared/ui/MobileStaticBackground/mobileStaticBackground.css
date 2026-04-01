@@ -1,0 +1,58 @@
+.mobile-static-bg {
+  --mobile-static-bg-fill: var(--gradient-hero-mobile);
+  --mobile-static-bg-mask-soft: 35%;
+  --mobile-static-bg-mask-mid: 50%;
+  --mobile-static-bg-mask-solid: 62%;
+}
+
+.mobile-static-bg__layer {
+  position: absolute;
+  inset: 0;
+}
+
+.mobile-static-bg__base {
+  background: var(--mobile-static-bg-fill);
+}
+
+.mobile-static-bg__grid {
+  background-position:
+    right -76px top -54px,
+    left -98px bottom -96px;
+  background-repeat: no-repeat;
+  background-size:
+    200% auto,
+    200% auto;
+  opacity: 0.4;
+}
+
+.mobile-static-bg__overlay {
+  background: var(--mobile-static-bg-fill);
+  -webkit-mask-image: radial-gradient(
+    circle var(--mobile-static-bg-hole-r) at var(--mobile-static-bg-hole-x) var(--mobile-static-bg-hole-y),
+    rgba(0, 0, 0, 0.18) 0%,
+    rgba(0, 0, 0, 0.5) var(--mobile-static-bg-mask-soft),
+    rgba(0, 0, 0, 0.78) var(--mobile-static-bg-mask-mid),
+    #000 var(--mobile-static-bg-mask-solid)
+  );
+  mask-image: radial-gradient(
+    circle var(--mobile-static-bg-hole-r) at var(--mobile-static-bg-hole-x) var(--mobile-static-bg-hole-y),
+    rgba(0, 0, 0, 0.18) 0%,
+    rgba(0, 0, 0, 0.5) var(--mobile-static-bg-mask-soft),
+    rgba(0, 0, 0, 0.78) var(--mobile-static-bg-mask-mid),
+    #000 var(--mobile-static-bg-mask-solid)
+  );
+}
+
+.mobile-static-bg__overlay--top {
+  --mobile-static-bg-hole-r: 650px;
+  --mobile-static-bg-hole-x: 104%;
+  --mobile-static-bg-hole-y: 8%;
+  clip-path: inset(0 0 34% 0);
+}
+
+.mobile-static-bg__overlay--bottom {
+  --mobile-static-bg-hole-r: 660px;
+  --mobile-static-bg-hole-x: -14%;
+  --mobile-static-bg-hole-y: 95%;
+  clip-path: inset(46% 0 0 0);
+}
