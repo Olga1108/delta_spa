@@ -3,7 +3,8 @@ import type { MultiplySectionContent } from '@entities/multiply'
 import { mapMultiplyData, useMultiplyQuery } from '@entities/multiply'
 import { useDictionary } from '@shared/lib/dictionary'
 import { AnimatedBackground } from '@/shared/ui/AnimatedBackground'
-import { useViewport } from '@shared/lib/device'
+import { MobileStaticBackground } from '@shared/ui/MobileStaticBackground'
+import { useViewport, useDevice } from '@shared/lib/device'
 import { SectionErrorState, SectionLoadingState } from '@shared/ui/SectionRequestState'
 import { Container } from '@shared/ui/Container'
 import { JoinDesktopLayout } from './components/JoinDesktopLayout'
@@ -12,6 +13,7 @@ import { getDesktopContentTop, getDesktopStageScale } from './constants'
 
 export const JoinSection = () => {
   const { locale, translate } = useDictionary()
+  const { isMdUp } = useDevice()
   const { data, isLoading, isError, refetch } = useMultiplyQuery(locale)
   const { width, height } = useViewport()
   const [activeAudience, setActiveAudience] = useState(0)
@@ -34,58 +36,64 @@ export const JoinSection = () => {
   )
 
   return (
-    <Container
-      fullWidth
-      className='relative h-full w-full self-start overflow-hidden bg-mobile pt-3 pb-8 md:self-stretch md:bg-transparent md:py-0'
-    >
-      <div
-        className='pointer-events-none absolute inset-y-0 hidden md:block'
-        style={{
-          left: 'calc(var(--container-padding-x) * -1)',
-          right: 'calc(var(--container-padding-x) * -1)',
-        }}
-      >
-        <AnimatedBackground variant='default' />
+    <>
+      <div className='absolute inset-0 md:hidden'>
+        <MobileStaticBackground />
       </div>
-
-      {isError ? (
-        <SectionErrorState
-          title={translate('section.error.title')}
-          description={translate('section.error.description')}
-          actionLabel={translate('section.error.retry')}
-          onAction={() => void refetch()}
-        />
-      ) : isLoading || items.length === 0 ? (
-        <SectionLoadingState />
-      ) : (
-        <>
-          <JoinDesktopLayout
-            items={items}
-            getAudienceLabel={getAudienceLabel}
-            desktopScale={desktopScale}
-            desktopContentTop={desktopContentTop}
-            activeAudience={safeActiveAudience}
-            hoveredAudience={hoveredAudience}
-            setActiveAudience={setActiveAudience}
-            setHoveredAudience={setHoveredAudience}
-            scalePx={scalePx}
-            scaleFloatPx={scaleFloatPx}
-            leftBlockScale={leftBlockScale}
-            scaleLeftPx={scaleLeftPx}
-            rightTextSize={rightTextSize}
-            rightArrowSize={rightArrowSize}
-            getCtaLabel={getCtaLabel}
+      <Container
+        fullWidth
+        className='relative h-full w-full self-start overflow-hidden pt-3 pb-8 md:self-stretch md:bg-transparent md:py-0'
+      >
+        {isMdUp ? (
+          <div
+            className='pointer-events-none absolute inset-y-0 hidden md:block'
+            style={{
+              left: 'calc(var(--container-padding-x) * -1)',
+              right: 'calc(var(--container-padding-x) * -1)',
+            }}
+          >
+            <AnimatedBackground variant='default' />
+          </div>
+        ) : null}
+        {isError ? (
+          <SectionErrorState
+            title={translate('section.error.title')}
+            description={translate('section.error.description')}
+            actionLabel={translate('section.error.retry')}
+            onAction={() => void refetch()}
           />
+        ) : isLoading || items.length === 0 ? (
+          <SectionLoadingState />
+        ) : (
+          <>
+            <JoinDesktopLayout
+              items={items}
+              getAudienceLabel={getAudienceLabel}
+              desktopScale={desktopScale}
+              desktopContentTop={desktopContentTop}
+              activeAudience={safeActiveAudience}
+              hoveredAudience={hoveredAudience}
+              setActiveAudience={setActiveAudience}
+              setHoveredAudience={setHoveredAudience}
+              scalePx={scalePx}
+              scaleFloatPx={scaleFloatPx}
+              leftBlockScale={leftBlockScale}
+              scaleLeftPx={scaleLeftPx}
+              rightTextSize={rightTextSize}
+              rightArrowSize={rightArrowSize}
+              getCtaLabel={getCtaLabel}
+            />
 
-          <JoinMobileLayout
-            items={items}
-            activeAudience={safeActiveAudience}
-            setActiveAudience={setActiveAudience}
-            getAudienceLabel={getAudienceLabel}
-            getCtaLabel={getCtaLabel}
-          />
-        </>
-      )}
-    </Container>
+            <JoinMobileLayout
+              items={items}
+              activeAudience={safeActiveAudience}
+              setActiveAudience={setActiveAudience}
+              getAudienceLabel={getAudienceLabel}
+              getCtaLabel={getCtaLabel}
+            />
+          </>
+        )}
+      </Container>
+    </>
   )
 }

@@ -1,7 +1,7 @@
 @property --animated-bg-hole-x {
   syntax: '<percentage>';
   inherits: false;
-  initial-value: -10%;
+  initial-value: -18%;
 }
 
 @property --animated-bg-hole-y {
@@ -12,9 +12,11 @@
 
 .animated-bg {
   --animated-bg-hole-r: calc(33dvh + 100px);
-  --animated-bg-hole-x: -10%;
+  --animated-bg-hole-x: -18%;
   --animated-bg-hole-y: 50%;
   --animated-bg-fill: var(--gradient-animated-default);
+  --animated-bg-duration: 30s;
+  --animated-bg-timing: ease-in-out;
 }
 
 .animated-bg--default {
@@ -61,29 +63,32 @@
     rgba(0, 0, 0, 0.45) 68%,
     #000 80%
   );
-  animation: animated-bg-hole-path 20s ease-in-out infinite;
+  animation: animated-bg-hole-path var(--animated-bg-duration) var(--animated-bg-timing) infinite;
 }
 
 @keyframes animated-bg-hole-path {
-  0%,
+  0% {
+    --animated-bg-hole-x: -18%;
+    --animated-bg-hole-y: 50%;
+  }
   18% {
-    --animated-bg-hole-x: -10%;
+    --animated-bg-hole-x: -18%;
     --animated-bg-hole-y: 50%;
   }
   34% {
-    --animated-bg-hole-x: 102%;
+    --animated-bg-hole-x: 110%;
     --animated-bg-hole-y: 8%;
   }
   50% {
-    --animated-bg-hole-x: -10%;
+    --animated-bg-hole-x: -18%;
     --animated-bg-hole-y: 50%;
   }
   76% {
-    --animated-bg-hole-x: 102%;
+    --animated-bg-hole-x: 110%;
     --animated-bg-hole-y: 92%;
   }
   100% {
-    --animated-bg-hole-x: -10%;
+    --animated-bg-hole-x: -18%;
     --animated-bg-hole-y: 50%;
   }
 }

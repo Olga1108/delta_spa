@@ -4,6 +4,7 @@ import { useDevice } from '@shared/lib/device'
 import { Container } from '@shared/ui/Container'
 import { useDictionary } from '@shared/lib/dictionary'
 import { ParallelogramButton } from '@shared/ui/ParallelogramButton'
+import { MobileStaticBackground } from '@shared/ui/MobileStaticBackground'
 import { Header } from '@widgets/header'
 import heroSnake from '@shared/assets/Images/hero/hero-image-main@1x.png'
 import { AnimatedBackground } from '@shared/ui/AnimatedBackground'
@@ -16,7 +17,10 @@ export const HeroSection = () => {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false)
 
   return (
-    <div className='relative flex w-full min-h-screen min-h-dvh flex-col overflow-hidden bg-mobile md:h-full md:min-h-0 md:self-stretch md:bg-transparent'>
+    <div className='relative flex w-full min-h-screen min-h-dvh flex-col overflow-hidden md:h-full md:min-h-0 md:self-stretch md:bg-transparent'>
+      <div className='absolute inset-0 md:hidden'>
+        <MobileStaticBackground />
+      </div>
       {isMdUp ? (
         <div className='pointer-events-none absolute inset-0 hidden md:block'>
           <AnimatedBackground variant='default' />

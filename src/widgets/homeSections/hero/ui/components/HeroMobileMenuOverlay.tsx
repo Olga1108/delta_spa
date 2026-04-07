@@ -5,6 +5,7 @@ import { useDictionary } from '@shared/lib/dictionary'
 import { useMobileHomeMenu } from '@shared/lib/useMobileHomeMenu'
 import { useBasePath } from '@shared/lib/useBasePath'
 import { LocaleSwitcher } from '@shared/ui/LocaleSwitcher'
+import { MobileStaticBackground } from '@shared/ui/MobileStaticBackground'
 import { heroMenuLinks } from '../../model/constants'
 import { HeroSocialLinks } from './HeroSocialLinks'
 
@@ -31,7 +32,8 @@ export const HeroMobileMenuOverlay = () => {
   }
 
   const overlay = (
-    <div className='fixed inset-0 z-[100] flex max-h-dvh flex-col overflow-hidden overscroll-behavior-none bg-mobile px-4 pt-4 pb-5 md:hidden'>
+    <div className='fixed inset-0 z-[100] flex max-h-dvh flex-col overflow-hidden overscroll-behavior-none px-4 pt-4 pb-5 md:hidden'>
+      <MobileStaticBackground />
       <div className='relative z-10 flex min-h-0 flex-1 flex-col'>
         <div className='flex shrink-0 items-center justify-between'>
           <a

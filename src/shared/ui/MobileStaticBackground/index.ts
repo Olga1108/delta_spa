@@ -1,0 +1,1 @@
+export { MobileStaticBackground } from './MobileStaticBackground'
